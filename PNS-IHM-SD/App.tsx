@@ -50,16 +50,16 @@ export default class App extends Component {
           zoomEnabled={true}  
           zoomControlEnabled={false}  
           initialRegion={{  
-            latitude: 48.901411,   
-            longitude: 2.330379,  
-            latitudeDelta: 0.25,  
-            longitudeDelta: 0.25,  
+            latitude: 43.615692,   
+            longitude: 7.071778,  
+            latitudeDelta: 0.03,  
+            longitudeDelta: 0.01,  
           }}>  
   
           <Marker  
-            coordinate={{ latitude: 28.579660, longitude: 77.321110 }}  
-            title={"JavaTpoint"}  
-            description={"Java Training Institute"}  
+            coordinate={{ latitude: 43.615692, longitude: 7.071778 }}  
+            title={"Polytech Nice Sophia"}  
+            description={"Polytech Nice Sophia la bonne école d'ingé"}  
           />  
         </MapView>  
           
@@ -71,13 +71,13 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   mapStyle: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height-30,
   },
   paragraph: {
     marginTop: 500,
