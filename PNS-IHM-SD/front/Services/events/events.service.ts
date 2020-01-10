@@ -1,6 +1,6 @@
 
 import {BehaviorSubject} from 'rxjs';
-import {Event } from '../../models/Event';
+import {Event } from '../../Models/Event';
 import axios from 'axios'
 
 
