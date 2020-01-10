@@ -9,7 +9,7 @@ export default StyleSheet.create({
     },
     mapStyle: {
       width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height-30,
+      height: Dimensions.get('window').height-10,
     },
     paragraph: {
       marginTop: 500,

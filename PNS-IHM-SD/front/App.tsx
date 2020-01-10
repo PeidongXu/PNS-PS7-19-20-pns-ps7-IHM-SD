@@ -1,9 +1,10 @@
 import React from 'react';
-import MapScreen from "./components/Map/Map"
+import Navigator from "./components/Navigation/Navigation";
+
 
 export default function App() {
   return (
-    <MapScreen/>
+    <Navigator/>
   )
 
 }
