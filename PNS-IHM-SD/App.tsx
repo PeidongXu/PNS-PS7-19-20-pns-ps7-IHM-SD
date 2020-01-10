@@ -5,7 +5,7 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-export default class App extends Component {  
+export default class App extends Component {
   state = {
     location: null,
     errorMessage: null,
@@ -32,7 +32,7 @@ export default class App extends Component {
     this.setState({ location });
   };
 
-  render() {  
+  render() {
     let text = 'Waiting..';
     let myLatitude, myLongitude;
     if (this.state.errorMessage) {
@@ -43,30 +43,31 @@ export default class App extends Component {
       myLongitude = this.state.location.coords.longitude;
 
     }
-    return (  
-      <View style={styles.container}>  
-        <MapView  style={styles.mapStyle}  
-          showsUserLocation={true}  
-          zoomEnabled={true}  
-          zoomControlEnabled={false}  
-          initialRegion={{  
-            latitude: 43.615692,   
-            longitude: 7.071778,  
-            latitudeDelta: 0.03,  
-            longitudeDelta: 0.01,  
-          }}>  
-  
-          <Marker  
-            coordinate={{ latitude: 43.615692, longitude: 7.071778 }}  
-            title={"Polytech Nice Sophia"}  
-            description={"Polytech Nice Sophia la bonne école d'ingé"}  
-          />  
-        </MapView>  
-          
-      </View>  
-    );  
-  }  
-}  
+    return (
+      <View style={styles.container}>
+        <MapView  style={styles.mapStyle}
+          showsUserLocation={true}
+          zoomEnabled={true}
+          zoomControlEnabled={false}
+          initialRegion={{
+            latitude: 43.615692,
+            longitude: 7.071778,
+            latitudeDelta: 0.03,
+            longitudeDelta: 0.01,
+          }}>
+
+          <Marker
+
+            coordinate={{ latitude: 43.615692, longitude: 7.071778 }}
+            title={'title'}
+            description={"Polytech Nice Sophia la bonne école d'ingé"}
+          />
+        </MapView>
+
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

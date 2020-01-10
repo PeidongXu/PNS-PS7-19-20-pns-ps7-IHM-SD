@@ -1,0 +1,47 @@
+{
+  "name": "back-end-starter-3a-pns-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "dev": "./node_modules/.bin/nodemon app/index.js",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.js app/",
+    "lint:fix": "./node_modules/.bin/eslint -c .eslintrc.js app/ --fix"
+  },
+  "precommit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delmotte/back-end-starter-3a-pns-2019.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delmotte/back-end-starter-3a-pns-2019/issues"
+  },
+  "homepage": "https://github.com/delmotte/back-end-starter-3a-pns-2019#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.0.2",
+    "@hapi/joi-date": "^2.0.1",
+    "body-parser": "1.18.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "joi": "14.3.1",
+    "morgan": "1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "5.13.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "nodemon": "1.18.10",
+    "pre-commit": "1.2.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "mocks/*"
+    ]
+  }
+}
