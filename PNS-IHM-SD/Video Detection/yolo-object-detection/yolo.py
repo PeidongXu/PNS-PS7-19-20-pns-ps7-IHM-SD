@@ -2,6 +2,7 @@
 # python yolo.py --image images/baggage_claim.jpg --yolo yolo-coco
 
 # import the necessary packages
+import sys
 import numpy as np
 import argparse
 import time
@@ -34,7 +35,7 @@ weightsPath = os.path.sep.join([args["yolo"], "yolov3.weights"])
 configPath = os.path.sep.join([args["yolo"], "yolov3.cfg"])
 
 # load our YOLO object detector trained on COCO dataset (80 classes)
-print("[INFO] loading YOLO from disk...")
+# print("[INFO] loading YOLO from disk...")
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
 # load our input image and grab its spatial dimensions
@@ -56,7 +57,9 @@ layerOutputs = net.forward(ln)
 end = time.time()
 
 # show timing information on YOLO
-print("[INFO] YOLO took {:.6f} seconds".format(end - start))
+
+# print("[INFO] YOLO took {:.6f} seconds".format(end - start))
+
 
 # initialize our lists of detected bounding boxes, confidences, and
 # class IDs, respectively
@@ -129,6 +132,8 @@ if len(idxs) > 0:
 
 
 
-print(smith_a)
+# print(smith_a)
+sys.stdout.write(str(smith_a))
+sys.stdout.flush()
 #cv2.imshow("Image", image)
 cv2.waitKey(0)
