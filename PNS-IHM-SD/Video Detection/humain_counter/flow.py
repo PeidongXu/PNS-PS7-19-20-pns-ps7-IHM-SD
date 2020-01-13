@@ -1,4 +1,11 @@
 import sys
+"""
+@version: 2.0
+@author: xupeidong
+@contact: xupeidong67@outlook.com
+@file: people_flow.py
+@updatetime: 2020/01/13 10:55
+"""
 
 if len(sys.argv) < 2:
     print("Usage: $ python {0} [video_path] [output_path(optional)]", sys.argv[0])

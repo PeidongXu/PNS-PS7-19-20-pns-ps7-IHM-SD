@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-@version: 1.0
-@author: liaoliwei
-@contact: levio@pku.edu.cn
+@version: 2.0
+@author: xupeidong
+@contact: xupeidong67@outlook.com
 @file: people_flow.py
-@time: 2018/7/9 14:52
+@updatetime: 2020/01/13 10:55
 """
 
-
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import colorsys
 from timeit import default_timer as timer
-
+#import tensorflow as tf
+#import tensorflow_probability as tfp
 import numpy as np
 from keras import backend as K
 from keras.models import load_model
@@ -27,13 +29,14 @@ gpu_num=1
 
 class YOLO(object):
     def __init__(self):
-        self.model_path = './model_data/yolo.h5' # model path or trained weights path
-        self.anchors_path = './model_data/yolo_anchors.txt'
-        self.classes_path = './model_data/coco_classes.txt'
+        self.model_path = 'model_data/yolo.h5' # model path or trained weights path
+        self.anchors_path = 'model_data/yolo_anchors.txt'
+        self.classes_path = 'model_data/coco_classes.txt'
         self.score = 0.3
         self.iou = 0.45
         self.class_names = self._get_class()
         self.anchors = self._get_anchors()
+        #self.sess = tf.compat.v1.keras.backend.get_session()
         self.sess = K.get_session()
         self.model_image_size = (416, 416) # fixed size or (None, None), hw
         self.boxes, self.scores, self.classes = self.generate()
