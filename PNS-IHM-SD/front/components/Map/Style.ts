@@ -9,8 +9,12 @@ export default StyleSheet.create({
       justifyContent: 'center',
     },
     mapStyle: {
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height-10,
+      //width: Dimensions.get('window').width,
+      //height: Dimensions.get('window').height-30,
+        flex: 1,
+        justifyContent: "center",
+        height: "50%",
+        width: "100%"
     },
     paragraph: {
       marginTop: 500,

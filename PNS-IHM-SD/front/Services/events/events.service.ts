@@ -7,11 +7,13 @@ import axios from 'axios'
 export class EventsService {
 
   public EventList: Event[] = [];
+  public test: string = "ceci est un test";
 
   private URL = 'http://172.20.10.2:9428/api/events';
    // private URL = 'http://localhost:9428/api/events';
 
   constructor() {
+      console.log('wsh');
       this.getEvents();
   }
 
@@ -26,9 +28,9 @@ export class EventsService {
 
  public getEvents(){
         axios.get<Event[]>(this.URL).then(res =>{
-            console.log(JSON.stringify(res.data));
             this.EventList = res.data;
             this.Event$.next(this.EventList)
+            console.log(this.Event$);
         } );
 
  }

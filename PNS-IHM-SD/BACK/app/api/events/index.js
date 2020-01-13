@@ -1,8 +1,32 @@
 const { Router } = require('express');
-const {Event } = require('../../models');
+const {Event, Site } = require('../../models');
 
 const router = new Router();
-router.get('/', (req, res) => res.status(200).json(Event.get()));
+
+function addCoordinate(){
+  let events = Event.get();
+
+  events.forEach((element) =>{
+    const tmpsite = Site.getById(element.siteID);
+    element['latitude'] = tmpsite.latitude;
+    element['longitude'] = tmpsite.longitude;
+  });
+
+  return events;
+}
+//router.get('/', (req, res) => res.status(200).json(Event.get()));
+
+router.get('/', (req, res) => {
+  try {
+    res.status(200).json(addCoordinate());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
 
 router.post('/', (req, res) => {
   try {

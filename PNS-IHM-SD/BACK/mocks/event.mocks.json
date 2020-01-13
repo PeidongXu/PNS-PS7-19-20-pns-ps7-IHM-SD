@@ -1,0 +1,22 @@
+[
+  {
+    "siteID": 1,
+    "date": "10-01-2020",
+    "startHour": "18:00",
+    "endHour": "20:00",
+    "sport": "foot",
+    "title": "test1",
+    "description": "match de foot",
+    "id": 1
+  },
+  {
+    "siteID": 2,
+    "date": "10-01-2020",
+    "startHour": "18:00",
+    "endHour": "20:00",
+    "sport": "foot",
+    "title": "test2",
+    "description": "match de foot",
+    "id": 2
+  }
+]
