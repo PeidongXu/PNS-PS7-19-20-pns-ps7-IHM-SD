@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import { forFadeFromBottomAndroid } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators';
 
 export default StyleSheet.create({
     container: {
@@ -15,5 +16,9 @@ export default StyleSheet.create({
       marginTop: 500,
       fontSize: 18,
       textAlign: 'center',
+    },
+    placeList: {
+      flex: 1,
+      justifyContent: "center",
     }
   });

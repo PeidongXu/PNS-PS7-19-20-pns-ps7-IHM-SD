@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { Platform, View} from 'react-native';
+import { Platform, View, Text} from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -9,10 +9,18 @@ import styles from "./Style";
 
 
 class MapScreen extends Component { 
-  state = {
-    location: null,
-    errorMessage: null,
+  static navigationOptions = props => {
+    const placeName = props.navigation.getParam("placeName");  
+   return { headerTitle: placeName };
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: null,
+      errorMessage: null,
+    };
+  }
   
   componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -22,6 +30,7 @@ class MapScreen extends Component {
     } else {
       this._getLocationAsync();
     }
+
   }
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -37,14 +46,12 @@ class MapScreen extends Component {
 
   render() {  
     let text = 'Waiting..';
-    this.props.children
     if (this.state.errorMessage) {
       text = this.state.errorMessage;
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
       const myLatitude = this.state.location.coords.latitude;
       const myLongitude = this.state.location.coords.longitude;
-
     }
     return (  
       <View style={styles.container}>  
@@ -64,8 +71,10 @@ class MapScreen extends Component {
             title={"Polytech Nice Sophia"}  
             description={"Polytech Nice Sophia la bonne école d'ingé"}  
           />  
-        </MapView>  
-          
+        </MapView> 
+        <View style={styles.placeList}>
+          <Text>{text}</Text>
+        </View>
       </View>  
     );  
   }  

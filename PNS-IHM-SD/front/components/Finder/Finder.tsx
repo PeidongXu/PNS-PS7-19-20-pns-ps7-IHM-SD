@@ -7,12 +7,15 @@ import MenuItem from "../Menu/Menu";
 //Styles
 import styles from "./style";
 class Finder extends Component {
+  static navigationOptions = {
+    headerTitle: "Find all Around Me!"
+  };
   render() {
-    //const { navigation } = this.props;
+    const { navigation } = this.props;
     return (
       <Container style={styles.container}>
         <Content>
-          <MenuItem/>
+          <MenuItem navigation={navigation}/>
         </Content>
       </Container>
     );

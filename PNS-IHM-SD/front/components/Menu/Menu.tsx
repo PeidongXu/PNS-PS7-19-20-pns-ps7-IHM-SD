@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import styles from "./style";
+import Countdown from "../countdown/countdown"
+import {CustomSlider} from "../Filter/CustomSlider"
 
 class Menu extends Component {
   /**
@@ -10,10 +12,26 @@ class Menu extends Component {
    *  @param {Number} size Icon size
    *  @param {String} color Icon color
    *  @param {String} type Icon type
-   
    */
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      singleSliderValues: [],
+      multiSliderValues: [],
+    }
+}
+singleSliderValueCallback =(values)=> {
+  this.setState({singleSliderValues : values})
+}
   getItem = (name, text, size, color, type) => (
-    <TouchableOpacity>
+    <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate("MapView", {
+            placeName: text
+          })
+        }
+      >
       <View style={styles.iconStyle}>
         <Icon
           name={name}
@@ -35,6 +53,21 @@ class Menu extends Component {
           {this.getItem("calendar", "Jour", 60, "#ffa54d", "font-awesome")}
           {this.getItem("md-fitness", "Sport", 60, "#66b3ff", "ionicon")}
           {this.getItem("favorite", "Favoris", 60, "#f66", "materialicons")}
+        </View>
+        <View>
+          <Countdown/>
+          <CustomSlider
+          min={"1"}
+          max={"3"}
+          LRpadding={25}
+          callback={this.singleSliderValueCallback}
+          single={true}
+          customMarkerRight={(e) => {
+            return (<CustomSliderMarkerRight
+            currentValue={e.currentValue}/>)
+            }}
+        />
+
         </View>
       </View>
     );
