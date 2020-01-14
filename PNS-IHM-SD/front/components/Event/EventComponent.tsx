@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import {Event } from '../../Models/Event';
 import Countdown from "../countdown/countdown"
+import About from "../About/About"
 
 
 class EventComponent extends Component{
@@ -27,7 +28,7 @@ class EventComponent extends Component{
                 <Text>{this.state.event.startHour}</Text>
                 <Text>{this.state.event.endHour}</Text>
                 <Text>{this.state.event.description}</Text>
-
+                <About/>
             </View>
 
         );

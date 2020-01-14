@@ -1,8 +1,9 @@
-import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import React, {Component} from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import axios from 'axios';
+import { Button } from "react-native-elements";
 
-export default class About extends React.Component{
+class About extends Component{
     _onPressButton = async () => {
         //GET request
         await fetch('http://172.20.10.2:9428/api/events/testing', {
@@ -39,31 +40,17 @@ export default class About extends React.Component{
     render(){
         return(
             <View  style={styles.view}>
-                <Text style={styles.title}>
-                    A propos de Polympic !
-                </Text>
-
-                <Text style={styles.desc}>
-                    Polympic est une application smartphone comportant une carte interactive avec des marqueurs
-                    d’événement sportif en temps réel. Elle comportera un filtrage des événements en fonction de
-                    différent critère temporel, sportif, lieux, … On pourra retrouver un espace pour les utilisateurs
-                    lambda ainsi qu’une page d’administration regroupant toutes les informations sur les événements
-                    sportifs ou humain. On pourra notamment y voir les caméras de surveillant (ou photo d’un moment
-                    donné) avec une détection des personnes, de problème (Par exemple : colis abandonnés).
-                </Text>
-                <Button
-                    onPress={this._onPressButton}
-                    title="Press Me"
-                    color="#841584"
-                />
-                <Text style={styles.footer}>
-                    Smith, Rayan, Aldric, Peidong...
-                </Text>
+            <Button
+                title="How many people ? "
+                icon={{name:'search'}}
+                onPress={this._onPressButton}
+            />
             </View>
         )
 
     }
 }
+export default About;
 
 const styles = StyleSheet.create({
     view:{

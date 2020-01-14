@@ -51,19 +51,6 @@ const bottomTab = createBottomTabNavigator(
         )
       })
     },
-    About: {
-      screen: About,
-      navigationOptions: ({ navigation }) => ({
-        title: "Account",
-        tabBarIcon: ({ focused }) => (
-          <Icon
-            name="user-circle"
-            size={30}
-            color={`${focused ? "#e90000" : "#575757"}`}
-          />
-        )
-      })
-    }
   },
   {
     navigationOptions: {
