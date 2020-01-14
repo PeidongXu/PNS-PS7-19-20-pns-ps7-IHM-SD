@@ -47,8 +47,8 @@ class MapScreen extends Component {
     this.setState({ location });
   };
 
-  //private URL = 'http://172.20.10.2:9428/api/events';
-  private URL = 'http://192.168.1.78:9428/api/events';
+  private URL = 'http://172.20.10.2:9428/api/events';
+  //private URL = 'http://192.168.1.78:9428/api/events';
   //private URL = 'http://localhost:9428/api/events';
 
 

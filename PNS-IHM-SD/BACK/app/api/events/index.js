@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const {Event, Site } = require('../../models');
+const  moment = require('moment');
 
 const router = new Router();
 
@@ -27,6 +28,92 @@ router.get('/', (req, res) => {
     }
   }
 });
+
+function checkDate(){
+  let now = moment()
+  let events = Event.get();
+  let filtredEvents= [];
+  events.forEach((element) =>{
+    let d = moment(element.date,'DD/MM/YYYY').format('DD/MM/YYYY')
+   // console.log(d)
+    //console.log(moment().format('DD/MM/YYYY'))
+    if(moment().format('DD/MM/YYYY') === d) {
+      filtredEvents.push(element)
+    }
+  });
+
+  return filtredEvents;
+}
+
+router.get('/today', (req, res) => {
+  try {
+    res.status(200).json(checkDate());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+function checkAfterDate(){
+  let now = moment();
+  /*console.log(now.format())
+  console.log(date)
+  console.log(moment(date,'DD-MM-YYYY').isAfter(now))*/
+  let events = Event.get();
+  let filtredEvents= []
+  events.forEach((element) =>{
+    let d = moment(element.date,'DD/MM/YYYY').format('DD/MM/YYYY')
+    console.log(d)
+    if(moment(element.date,'DD/MM/YYYY').isAfter(now)) {
+      filtredEvents.push(element)
+    }
+  });
+  return filtredEvents;
+}
+
+router.get('/after', (req, res) => {
+  try {
+    res.status(200).json(checkAfterDate());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+
+function checkBeforeDate(){
+  let now = moment();
+  /*console.log(now.format())
+  console.log(date)
+  console.log(moment(date,'DD-MM-YYYY').isAfter(now))*/
+  let events = Event.get();
+  let filtredEvents= []
+  events.forEach((element) =>{
+    if(moment(element.date,'DD/MM/YYYY').isBefore(now)) {
+      filtredEvents.push(element)
+    }
+  });
+  return filtredEvents;
+}
+
+router.get('/before', (req, res) => {
+  try {
+    res.status(200).json(checkBeforeDate());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
 
 router.post('/', (req, res) => {
   try {

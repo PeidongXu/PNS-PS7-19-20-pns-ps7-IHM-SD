@@ -77,8 +77,8 @@ class Menu extends Component {
       </View>
     </TouchableOpacity>
   );
-  
-  
+
+
   render() {
     return (
       <View style={styles.container}>

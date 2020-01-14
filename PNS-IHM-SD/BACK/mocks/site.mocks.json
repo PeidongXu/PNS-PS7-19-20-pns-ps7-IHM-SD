@@ -2,13 +2,31 @@
   {
     "latitude": 43.615692,
     "longitude": 7.071778,
-    "title": "test1",
+    "title": "Polytech-Nice-Sophia",
     "id": 1
   },
   {
     "latitude": 43.615379,
     "longitude": 7.067442,
-    "title": "test2",
+    "title": "I3S",
     "id": 2
+  },
+  {
+    "latitude": 43.614565,
+    "longitude": 7.071071,
+    "title": "Eurecom",
+    "id": 3
+  },
+  {
+    "latitude": 43.617311,
+    "longitude": 7.064558,
+    "title": "PEIP",
+    "id": 4
+  },
+  {
+    "latitude": 43.616663,
+    "longitude": 7.072128,
+    "title": "IUT",
+    "id": 5
   }
 ]

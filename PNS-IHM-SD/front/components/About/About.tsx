@@ -5,7 +5,7 @@ import axios from 'axios';
 export default class About extends React.Component{
     _onPressButton = async () => {
         //GET request
-        await fetch('http://192.168.43.231:9428/api/events/testing', {
+        await fetch('http://172.20.10.2:9428/api/events/testing', {
             method: 'GET'
             //Request Type
         })
