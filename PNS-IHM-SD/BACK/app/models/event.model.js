@@ -9,4 +9,5 @@ module.exports = new BaseModel('Event', {
   sport: Joi.string().required(),
   title: Joi.string().required(),
   description: Joi.string().required(),
+  image: Joi.string().required(),
 });

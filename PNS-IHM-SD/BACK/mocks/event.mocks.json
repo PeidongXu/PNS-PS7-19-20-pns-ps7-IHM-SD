@@ -7,6 +7,7 @@
     "sport": "Football",
     "title": "Allemagne - Espagne",
     "description": "Match de Football équipe d'Allemagne contre l'équipe d'Espagne.",
+    "image": "foot",
     "id": 1
   },
   {
@@ -17,6 +18,7 @@
     "sport": "Athlétisme",
     "title": "100 mètres haies",
     "description": "100 mètres haies",
+    "image": "athle",
     "id": 2
   },
   {
@@ -27,6 +29,7 @@
     "sport": "Athlétisme",
     "title": "Saut en hauteur",
     "description": "Saut en hauteur",
+    "image": "athle",
     "id": 3
   },
   {
@@ -37,6 +40,7 @@
     "sport": "Tennis",
     "title": "France - Suisse",
     "description": "Match de Tennis équipe de France contre l'équipe Suisse.",
+    "image": "tennis",
     "id": 4
   },
   {
@@ -47,6 +51,7 @@
     "sport": "Basketball",
     "title": "France - Italie",
     "description": "Match de Basketball équipe de France contre l'équipe d'Italie.",
+    "image": "basket",
     "id": 5
   },
   {
@@ -57,6 +62,7 @@
     "sport": "Golf",
     "title": "18 trous",
     "description": "18 trous au golde de Polympic.",
+    "image": "golf",
     "id": 5
   }
 ]
