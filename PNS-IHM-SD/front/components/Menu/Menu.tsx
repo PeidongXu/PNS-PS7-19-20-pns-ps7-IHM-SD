@@ -11,14 +11,16 @@ class Menu extends Component {
    *  @param {Number} size Icon size
    *  @param {String} color Icon color
    *  @param {String} type Icon type
+   *  @param {String} time time name
    */
 
 
-  getItem = (name, text, size, color, type) => (
+  getItem = (name, text, size, color, type, time) => (
     <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate("MapView", {
-            placeName: text
+          this.props.navigation.navigate("MapEvent", {
+            placeName: text,
+            TimeData: time
           })
         }
       >
@@ -35,11 +37,12 @@ class Menu extends Component {
       </View>
     </TouchableOpacity>
   );
-  getItemNow = (name, text, size, color, type) => (
+  getItemNow = (name, text, size, color, type, time) => (
     <TouchableOpacity
         onPress={() =>
           this.props.navigation.navigate("MapEvent", {
-            placeName: text
+            placeName: text,
+            TimeData: time
           })
         }
       >
@@ -83,15 +86,17 @@ class Menu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {this.getItemNow("flag", "Right Now", 60, "#00ea75", "font-awesome")}
-          {this.getItemDay("calendar", "Today", 60, "#ffa54d", "font-awesome")}
-          {this.getItem("md-fitness", "Sports", 60, "#66b3ff", "ionicon")}
-          {this.getItem("favorite", "Favorites", 60, "#f66", "materialicons")}
+          {this.getItemNow("flag", "Right Now", 70, "#00ea75", "font-awesome","today")}
+          {this.getItemDay("calendar", "Choose Day", 70, "#ffa54d", "font-awesome")}
+          {this.getItem("flag-o", "Events Done", 40, "#66b3ff", "font-awesome", "before")}
+          {this.getItem("flag-checkered", "Now", 40, "#66b3ff", "font-awesome","today")}
+          {this.getItem("flag", "Not Started", 40, "#66b3ff", "font-awesome","after" )}
         </View>
       </View>
     );
   }
 }
-
+//{this.getItem("md-fitness", "Sports", 60, "#66b3ff", "ionicon")}
+//{this.getItem("favorite", "Favorites", 60, "#f66", "materialicons")}
 
 export default Menu;

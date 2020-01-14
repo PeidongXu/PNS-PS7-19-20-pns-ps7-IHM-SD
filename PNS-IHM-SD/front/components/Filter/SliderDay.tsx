@@ -32,7 +32,7 @@ class SliderDay extends Component {
                 callback={this.singleSliderValueCallback}
                 single={true}
             />
-            <Text>bite{this.state.value}</Text>
+            <Text>{this.state.value}</Text>
       </View>
     );
   }

@@ -51,6 +51,10 @@ function Item({event}) {
 
 
 class EventsList extends Component{
+    static navigationOptions = props => {
+        const TimeData = props.navigation.getParam("TimeData");
+       return { TimeData };
+      };
     state = {
         load: "false",
         events:[],
@@ -67,7 +71,16 @@ class EventsList extends Component{
        this.getEvents();
     }
 
-    private URL = 'http://172.20.10.2:9428/api/events';
+    private URLGeneration () {
+        if(this.props.navigation.getParam("TimeData")) {
+          return 'http://172.20.10.2:9428/api/events/' + this.props.navigation.getParam("TimeData");
+        }else{
+          return 'http://172.20.10.2:9428/api/events'
+        }
+       
+      }
+    
+      private URL = this.URLGeneration();
     //private URL = 'http://192.168.1.78:9428/api/events';
      //private URL = 'http://localhost:9428/api/events';
 

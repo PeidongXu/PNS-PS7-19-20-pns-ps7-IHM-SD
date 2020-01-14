@@ -59,7 +59,6 @@ export class CustomSlider extends Component{
         this.setState({
             second : values[0],
         })  
-        console.log(values[0])
 
        }else{
         this.setState({

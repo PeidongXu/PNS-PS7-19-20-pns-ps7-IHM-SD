@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { Platform, View, Text} from 'react-native';
+import * as geolib from 'geolib';
+import { Platform, View, Dimensions, Text} from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -9,21 +10,21 @@ import styles from "./Style";
 import axios from "axios";
 import {Event} from "../../Models/Event";
 
+const GOOGLE_MAPS_APIKEY = 'AIzaSyCYHUOtzZvpFD2nUeElqeVQ-Jp46KNGvyY';
 
 class MapScreen extends Component {
   static navigationOptions = props => {
-    const placeName = props.navigation.getParam("placeName");
-   return { headerTitle: placeName };
+    const TimeData = props.navigation.getParam("TimeData");
+   return { TimeData };
   };
-
   constructor(props) {
     super(props);
     this.state = {
       location: null,
       errorMessage: null,
       events:[],
-    };
-  }
+  };
+}
 
   componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -47,12 +48,22 @@ class MapScreen extends Component {
     this.setState({ location });
   };
 
-  private URL = 'http://172.20.10.2:9428/api/events';
+  private URLGeneration () {
+    if(this.props.navigation.getParam("TimeData")) {
+      return 'http://172.20.10.2:9428/api/events/' + this.props.navigation.getParam("TimeData");
+    }else{
+      return 'http://172.20.10.2:9428/api/events'
+    }
+   
+  }
+
+  private URL = this.URLGeneration();
   //private URL = 'http://192.168.1.78:9428/api/events';
   //private URL = 'http://localhost:9428/api/events';
 
 
   private getEvents = async () => {
+    console.log(this.URL)
     axios.get<Event[]>(this.URL).then(res => {
       this.setState({events: res.data});
     });
@@ -68,6 +79,11 @@ class MapScreen extends Component {
       const myLatitude = this.state.location.coords.latitude;
       const myLongitude = this.state.location.coords.longitude;
     }
+
+    console.log("distance: "+geolib.getPreciseDistance(
+      { latitude: 43.615560, longitude: 7.071767 },
+      { latitude: 43.617323, longitude: 7.074716 }
+  ))
     return (
       <View style={styles.container}>
         <MapView  style={styles.mapStyle}
