@@ -117,6 +117,7 @@ class EventsList extends Component{
         let location = await Location.getCurrentPositionAsync({});
         this.setState({ location });
     };
+    
 
     renderItem = ({ item }) => {
         return (
@@ -128,6 +129,14 @@ class EventsList extends Component{
                     <Text style={styles.secondaryText}>{item.description}</Text>
                 </View> 
                 </TouchableOpacity>
+                <View
+                    style={{
+                    height: 1,
+                    width: "86%",
+                    backgroundColor: "#CED0CE",
+                    marginLeft: "14%"
+                    }}
+                />
             </View>
         );
     };
@@ -140,7 +149,7 @@ class EventsList extends Component{
     closeModal() {
         this.setState({modalVisible:false});
     }
-
+    
 
     render(){
        /* const myLatitude = this.state.location.coords.latitude;
