@@ -5,7 +5,7 @@ export class Item extends Component {
     render() {
         return (
             <View>
-                <Text style={ [ this.checkActive() ? styles.active : styles.inactive]}>{this.props.value}</Text>
+                <Text style={ [ this.checkActive() ? styles.active : styles.inactive]}>{this.props.label}</Text>
                 <Text style={[ this.checkActive() ? styles.line : {}]}> { this.checkActive() ? '|' : ''}</Text>
             </View>
         );

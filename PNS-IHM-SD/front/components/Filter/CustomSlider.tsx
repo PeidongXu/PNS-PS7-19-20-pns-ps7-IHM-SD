@@ -35,12 +35,15 @@ export class CustomSlider extends Component{
                         customMarker={CustomMarker}
                         snapped={true}
                     />
+                     <Text>{this.state.first}</Text>
                 </View>
             </View>
         );
     }
 
     multiSliderValuesChange = values => {
+        console.log('Slider values: ', values)
+      console.log('this.props: ', this.props)
        if(this.props.single ){
         this.setState({
             second : values[0],
@@ -58,13 +61,36 @@ export class CustomSlider extends Component{
     renderScale=()=> {
         const items = [];
         for (let i=this.props.min; i <= this.props.max; i++) {
-            items.push(
-                <Item 
-                    value = {i}
-                    first = {this.state.first}
-                    second = {this.state.second}
-                />
-            );
+            if(i == 1) {
+                items.push(
+                    <Item 
+                        value = {i}
+                        label = "Done"
+                        first = {this.state.first}
+                        second = {this.state.second}
+                    />
+                );
+            }
+            if(i == 2) {
+                items.push(
+                    <Item 
+                        value = {i}
+                        label = "Right Now"
+                        first = {this.state.first}
+                        second = {this.state.second}
+                    />
+                );
+            }
+            if(i == 3) {
+                items.push(
+                    <Item 
+                        value = {i}
+                        label = "Not Started"
+                        first = {this.state.first}
+                        second = {this.state.second}
+                    />
+                );
+            }
         }
         return items;
     }
