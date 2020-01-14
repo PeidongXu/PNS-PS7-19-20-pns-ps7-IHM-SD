@@ -78,6 +78,9 @@ class EventComponent extends Component{
                 <Text style={styles.description}>You are {distance}m from the event</Text>
                 <Text style={styles.description}>{this.state.event.description}</Text>
             </View>
+            <View>
+                <About/>
+            </View>
         </View>
 
         );
