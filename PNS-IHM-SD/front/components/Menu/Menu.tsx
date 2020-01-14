@@ -59,7 +59,7 @@ class Menu extends Component {
   getItemDay = (name, text, size, color, type) => (
     <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate("ModalDay", {
+          this.props.navigation.navigate("SliderDay", {
             placeName: text
           })
         }
@@ -77,8 +77,8 @@ class Menu extends Component {
       </View>
     </TouchableOpacity>
   );
-
-
+  
+  
   render() {
     return (
       <View style={styles.container}>

@@ -3,6 +3,7 @@ import {StyleSheet,Text,View, Dimensions} from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { CustomMarker } from './CustomMarker';
 import { Item } from './Item';
+import { Button } from "react-native-elements";
 
 export class CustomSlider extends Component{
 
@@ -14,6 +15,18 @@ export class CustomSlider extends Component{
           second: this.props.max,
         }
     }
+
+    
+    getItem = (value) => (
+        <Button
+          title="Search"
+          icon={{name:'search'}}
+          onPress={() => this.props.navigation.navigate("MapEvent", {
+            sliderValue: value
+          })}
+        />
+    );
+
 
     render() {
         return (
@@ -35,19 +48,19 @@ export class CustomSlider extends Component{
                         customMarker={CustomMarker}
                         snapped={true}
                     />
-                     <Text>{this.state.first}</Text>
+                    {this.getItem(this.state.value)}
                 </View>
             </View>
         );
     }
 
     multiSliderValuesChange = values => {
-        console.log('Slider values: ', values)
-      console.log('this.props: ', this.props)
        if(this.props.single ){
         this.setState({
             second : values[0],
         })  
+        console.log(values[0])
+
        }else{
         this.setState({
             multiSliderValue: values,
