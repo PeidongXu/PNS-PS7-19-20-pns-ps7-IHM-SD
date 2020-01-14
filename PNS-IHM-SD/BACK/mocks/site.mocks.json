@@ -28,5 +28,11 @@
     "longitude": 7.072128,
     "title": "IUT",
     "id": 5
+  },
+  {
+    "latitude": 43.618379,
+    "longitude": 7.074364,
+    "title": "Golf",
+    "id": 6
   }
 ]
