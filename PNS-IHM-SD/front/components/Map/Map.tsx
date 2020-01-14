@@ -54,7 +54,7 @@ class MapScreen extends Component {
     }else{
       return 'http://172.20.10.2:9428/api/events'
     }
-   
+
   }
 
   private URL = this.URLGeneration();
@@ -63,7 +63,7 @@ class MapScreen extends Component {
 
 
   private getEvents = async () => {
-    console.log(this.URL)
+   // console.log(this.URL)
     axios.get<Event[]>(this.URL).then(res => {
       this.setState({events: res.data});
     });
@@ -79,11 +79,10 @@ class MapScreen extends Component {
       const myLatitude = this.state.location.coords.latitude;
       const myLongitude = this.state.location.coords.longitude;
     }
-
-    console.log("distance: "+geolib.getPreciseDistance(
+   /* console.log("distance: "+geolib.getPreciseDistance(
       { latitude: 43.615560, longitude: 7.071767 },
       { latitude: 43.617323, longitude: 7.074716 }
-  ))
+  ))*/
     return (
       <View style={styles.container}>
         <MapView  style={styles.mapStyle}

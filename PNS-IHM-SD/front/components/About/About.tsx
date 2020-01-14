@@ -39,7 +39,7 @@ class About extends Component{
     }*/
     render(){
         return(
-            <View  style={styles.view}>
+            <View  style={styles.container}>
             <Button
                 title="How many people ? "
                 icon={{name:'search'}}
@@ -53,6 +53,10 @@ class About extends Component{
 export default About;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
     view:{
         flex: 1,
         marginTop: 25,

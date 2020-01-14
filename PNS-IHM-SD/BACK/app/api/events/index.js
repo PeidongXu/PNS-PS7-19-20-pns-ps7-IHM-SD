@@ -38,6 +38,9 @@ function checkDate(){
    // console.log(d)
     //console.log(moment().format('DD/MM/YYYY'))
     if(moment().format('DD/MM/YYYY') === d) {
+      const tmpsite = Site.getById(element.siteID);
+      element['latitude'] = tmpsite.latitude;
+      element['longitude'] = tmpsite.longitude;
       filtredEvents.push(element)
     }
   });
@@ -65,9 +68,12 @@ function checkAfterDate(){
   let events = Event.get();
   let filtredEvents= []
   events.forEach((element) =>{
-    let d = moment(element.date,'DD/MM/YYYY').format('DD/MM/YYYY')
-    console.log(d)
+   /* let d = moment(element.date,'DD/MM/YYYY').format('DD/MM/YYYY')
+    console.log(d)*/
     if(moment(element.date,'DD/MM/YYYY').isAfter(now)) {
+      const tmpsite = Site.getById(element.siteID);
+      element['latitude'] = tmpsite.latitude;
+      element['longitude'] = tmpsite.longitude;
       filtredEvents.push(element)
     }
   });
@@ -95,7 +101,11 @@ function checkBeforeDate(){
   let events = Event.get();
   let filtredEvents= []
   events.forEach((element) =>{
-    if(moment(element.date,'DD/MM/YYYY').isBefore(now)) {
+    let d = moment(element.date,'DD/MM/YYYY').format('DD/MM/YYYY')
+    if((moment(element.date,'DD/MM/YYYY').isBefore(now)) && !(moment().format('DD/MM/YYYY') === d)) {
+      const tmpsite = Site.getById(element.siteID);
+      element['latitude'] = tmpsite.latitude;
+      element['longitude'] = tmpsite.longitude;
       filtredEvents.push(element)
     }
   });
