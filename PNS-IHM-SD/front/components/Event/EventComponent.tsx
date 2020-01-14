@@ -3,6 +3,8 @@ import {
     StyleSheet,
     Text, TouchableOpacity,
     View,
+    Dimensions,
+    Image,
 
 } from 'react-native';
 import {Event } from '../../Models/Event';
@@ -60,21 +62,48 @@ class EventComponent extends Component{
 
 
         return(
-            <View >
-                <Text>{this.state.event.title}</Text>
-
-                <Text>{this.state.event.date}</Text>
-                <Text>{this.state.event.startHour}</Text>
-                <Text>{this.state.event.endHour}</Text>
+        <View>
+            <View style={styles.center}>
+                <Image style={styles.picture} source={{ uri: '../../assets/sites/polytech.jpg' }} />
+                <Text style={styles.normal}>Starts in :  </Text>
                 <Countdown
-                countdown ={this.getCountdown()}
+                    countdown ={this.getCountdown()}
                 />
-                <Text>{distance}</Text>
-                <Text>{this.state.event.description}</Text>
             </View>
+            <View style={styles.center}>
+                <Text style={styles.title}>{this.state.event.title}</Text>
+                <Text style={styles.normal}>Date: {this.state.event.date}</Text>
+                <Text style={styles.normal}>Début: {this.state.event.startHour}</Text>
+                <Text style={styles.normal}>Fin: {this.state.event.endHour}</Text>
+                <Text style={styles.description}>You are {distance}m from the event</Text>
+                <Text style={styles.description}>{this.state.event.description}</Text>
+            </View>
+        </View>
 
         );
     }
 }
 
 export default EventComponent;
+
+const styles = StyleSheet.create({
+    picture: { width: Dimensions.get('window').width, height:Dimensions.get('window').width/2},
+    center: {
+      textAlign: 'center',
+      alignItems: 'center',
+      marginTop: 20,
+    },
+    description: {
+      fontSize: 18,
+      margin: 20
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 22,
+        color: 'black',
+        marginBottom: 4,
+    },
+    normal:{
+      fontSize: 18,
+    }
+});

@@ -8,5 +8,6 @@ export interface Event {
     sport:string
     title:string
     description:string
+    image:string
 
 }

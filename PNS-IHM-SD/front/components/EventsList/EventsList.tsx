@@ -5,7 +5,7 @@ import {
     View,
     SafeAreaView,
     Modal,
-    SectionList, FlatList, Platform, TouchableOpacity, Button,
+    SectionList, FlatList, Platform, TouchableOpacity, Button, Image
 } from 'react-native';
 import Constants from 'expo-constants';
 import {EventsService} from '../../Services/events' ;
@@ -26,6 +26,7 @@ const DATA = [
         "sport": "foot",
         "title": "test1",
         "description": "match de foot",
+        "image": "foot",
         "id": 1578661732220
     },
     {
@@ -36,6 +37,7 @@ const DATA = [
         "sport": "foot",
         "title": "test2",
         "description": "match de foot",
+        "image": "foot",
         "id": 1578661732221
     },
 ];
@@ -118,9 +120,13 @@ class EventsList extends Component{
 
     renderItem = ({ item }) => {
         return (
-            <View style={styles.item}>
+            <View style={styles.row}>
                 <TouchableOpacity onPress={() => this.openModal(item)}>
-                    <Text style={styles.title}>{item.title}</Text>
+                <Image style={styles.picture} source={{ uri: '../../assets/sites/'+ item.image+'.jpg' }} />
+                <View>
+                    <Text style={styles.primaryText}>{item.title}</Text>
+                    <Text style={styles.secondaryText}>{item.description}</Text>
+                </View> 
                 </TouchableOpacity>
             </View>
         );
@@ -144,6 +150,7 @@ class EventsList extends Component{
         return (
             <SafeAreaView style={styles.container}>
                 <Modal
+                    animationType={"slide"}
                     visible={this.state.modalVisible}
                     onTouchOutside={() => {
                         this.closeModal();
@@ -201,5 +208,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
     },
+    row: { flexDirection: 'row', alignItems: 'center', padding: 12 },
+    picture: { width: 50, height: 50, borderRadius: 25, marginRight: 18 },
+    primaryText: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: 'black',
+        marginBottom: 4,
+    },
+    secondaryText: { color: 'grey' },
 });
  export default EventsList ;
