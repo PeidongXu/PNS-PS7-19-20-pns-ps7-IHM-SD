@@ -5,9 +5,17 @@ import { Button } from "react-native-elements";
 import {serverUrl} from "../../serverConfig/server.config";
 
 class About extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            event: this.props.event
+        }
+    }
     _onPressButton = async () => {
         //GET request
-        await fetch(serverUrl+'/api/events/testing', {
+        await fetch(serverUrl+'/api/events/detection/'+this.state.event.id, {
+        //await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
             method: 'GET'
             //Request Type
         })
@@ -15,8 +23,8 @@ class About extends Component{
             //If response is in json then in success
             .then((responseJson) => {
                 //Success
-                console.log(responseJson);
-                alert(JSON.stringify(responseJson));
+              //  console.log(responseJson);
+                alert("Il y a "+ JSON.stringify(responseJson) + " personne(s) à cet event");
             })
             //If response is not in json then in error
             .catch((error) => {
@@ -40,7 +48,7 @@ class About extends Component{
     }*/
     render(){
         return(
-            <View  style={styles.container}>
+            <View  style={styles.view}>
             <Button
                 title="How many people ? "
                 icon={{name:'search'}}
@@ -48,35 +56,13 @@ class About extends Component{
             />
             </View>
         )
-
     }
 }
 export default About;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-    },
+
     view:{
-        flex: 1,
-        marginTop: 25,
-        alignItems: 'center',
-        marginHorizontal: 8,
-        marginVertical: 10
-    },
-    title: {
-        fontSize:22,
-        marginTop: 5,
-        marginBottom: 15
-    },
-    desc:{
-    },
-    footer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 36,
-        position: 'absolute',
-        bottom:0
+        margin: 20,
     }
 })
