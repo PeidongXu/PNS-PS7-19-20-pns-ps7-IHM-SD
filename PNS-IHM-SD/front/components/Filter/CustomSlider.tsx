@@ -9,21 +9,21 @@ export class CustomSlider extends Component{
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
           multiSliderValue: [this.props.min, this.props.max],
           first: this.props.min,
           second: this.props.max,
         }
     }
 
-    
+
     getItem = (value) => (
         <Button
           title="Search"
           icon={{name:'search'}}
-          onPress={() => this.props.navigation.navigate("MapEvent", {
+         /* onPress={() => this.props.navigation.navigate("MapEvent", {
             sliderValue: value
-          })}
+          }*)}*/
         />
     );
 
@@ -58,14 +58,14 @@ export class CustomSlider extends Component{
        if(this.props.single ){
         this.setState({
             second : values[0],
-        })  
+        })
 
        }else{
         this.setState({
             multiSliderValue: values,
             first : values[0],
             second : values[1],
-        }) 
+        })
        }
         //this.props.callback(values)
     }
@@ -75,7 +75,7 @@ export class CustomSlider extends Component{
         for (let i=this.props.min; i <= this.props.max; i++) {
             if(i == 1) {
                 items.push(
-                    <Item 
+                    <Item
                         value = {i}
                         label = "Done"
                         first = {this.state.first}
@@ -85,7 +85,7 @@ export class CustomSlider extends Component{
             }
             if(i == 2) {
                 items.push(
-                    <Item 
+                    <Item
                         value = {i}
                         label = "Right Now"
                         first = {this.state.first}
@@ -95,7 +95,7 @@ export class CustomSlider extends Component{
             }
             if(i == 3) {
                 items.push(
-                    <Item 
+                    <Item
                         value = {i}
                         label = "Not Started"
                         first = {this.state.first}

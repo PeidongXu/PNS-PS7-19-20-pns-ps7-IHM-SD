@@ -128,7 +128,7 @@ class EventsList extends Component{
                 <View>
                     <Text style={styles.primaryText}>{item.title}</Text>
                     <Text style={styles.secondaryText}>{item.description}</Text>
-                </View> 
+                </View>
                 </TouchableOpacity>
                 <View
                     style={{
@@ -177,8 +177,6 @@ class EventsList extends Component{
                                 title="Close modal"
                             >
                             </Button>
-                            <About/>
-
                         </View>
                     </View>
 
