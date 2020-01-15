@@ -65,7 +65,7 @@ class EventComponent extends Component{
         return(
         <View>
             <View style={styles.center}>
-                <Image style={styles.picture} source={{ uri: '../../assets/sites/polytech.jpg' }} />
+                <Image style={styles.picture} source={require('./../../assets/sites/polytech.jpg')} />
 
                 <Text style={styles.normal}>Starts in :  </Text>
                 <Countdown

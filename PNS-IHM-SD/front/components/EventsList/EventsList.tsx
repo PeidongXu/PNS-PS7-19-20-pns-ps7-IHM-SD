@@ -118,13 +118,45 @@ class EventsList extends Component{
         let location = await Location.getCurrentPositionAsync({});
         this.setState({ location });
     };
-    
+
 
     renderItem = ({ item }) => {
+        let icon
+        switch(item.image) {
+            case "athle": {
+                icon = require('./../../assets/sites/athle.jpg')
+                break;
+            }
+            case "basket": {
+                icon = require('./../../assets/sites/basket.jpg')
+                break;
+            }
+            case "foot": {
+                icon = require('./../../assets/sites/foot.jpg')
+                break;
+            }
+            case "golf": {
+                icon = require('./../../assets/sites/golf.jpg')
+                break;
+            }
+            case "hand": {
+                icon = require('./../../assets/sites/hand.jpg')
+                break;
+            }
+            case "tennis": {
+                icon = require('./../../assets/sites/tennis.jpg')
+                break;
+            }
+            default: {
+                icon = require('./../../assets/sites/polytech.jpg')
+                break;
+            }
+        }
         return (
+
             <View style={styles.row}>
                 <TouchableOpacity onPress={() => this.openModal(item)}>
-                <Image style={styles.picture} source={{ uri: '../../assets/sites/'+ item.image+'.jpg' }} />
+                <Image style={styles.picture} source={icon} />
                 <View>
                     <Text style={styles.primaryText}>{item.title}</Text>
                     <Text style={styles.secondaryText}>{item.description}</Text>
@@ -150,7 +182,7 @@ class EventsList extends Component{
     closeModal() {
         this.setState({modalVisible:false});
     }
-    
+
 
     render(){
        /* const myLatitude = this.state.location.coords.latitude;
