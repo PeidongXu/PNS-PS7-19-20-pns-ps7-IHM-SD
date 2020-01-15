@@ -156,6 +156,22 @@ router.get('/testing', (req, res) => {
 
 });
 
+router.get('/testing/by-image/:name', (req, res) => {
+
+  var spawn = require("child_process").spawn;
+
+  var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+req.params.name,"--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
+
+  process.stdout.on('data', (data) => {
+    res.status(200).json(parseInt(data.toString(),10));
+  });
+
+  // Handle error output
+  process.stderr.on('data', (data) => {
+    res.status(401).json(data.toString());
+  });
+
+});
 /*TEST END*/
 
 module.exports = router;
