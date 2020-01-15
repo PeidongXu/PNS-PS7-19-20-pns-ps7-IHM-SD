@@ -14,7 +14,8 @@ class About extends Component{
     }
     _onPressButton = async () => {
         //GET request
-        await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
+        await fetch(serverUrl+'/api/events/detection/'+this.state.event.id, {
+        //await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
             method: 'GET'
             //Request Type
         })
@@ -55,35 +56,13 @@ class About extends Component{
             />
             </View>
         )
-
     }
 }
 export default About;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-    },
+
     view:{
-        width: 150, height: 150,
-        marginTop: 25,
-        alignItems: 'center',
-        marginHorizontal: 8,
-        marginVertical: 10
-    },
-    title: {
-        fontSize:22,
-        marginTop: 5,
-        marginBottom: 15
-    },
-    desc:{
-    },
-    footer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 36,
-        position: 'absolute',
-        bottom:0
+        margin: 20,
     }
 })
