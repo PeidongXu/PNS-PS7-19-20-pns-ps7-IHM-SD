@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import axios from 'axios';
 import { Button } from "react-native-elements";
+import {serverUrl} from "../../serverConfig/server.config";
 
 class About extends Component{
     _onPressButton = async () => {
         //GET request
-        await fetch('http://172.20.10.2:9428/api/events/testing', {
+        await fetch(serverUrl+'/api/events/testing', {
             method: 'GET'
             //Request Type
         })

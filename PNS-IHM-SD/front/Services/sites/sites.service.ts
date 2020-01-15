@@ -2,13 +2,14 @@
 import {BehaviorSubject} from 'rxjs';
 import {Site } from '../../Models/Site';
 import axios from 'axios'
+import {serverUrl} from "../../serverConfig/server.config";
 
 
 export class SitesService {
 
   public SiteList: Site[] = [];
 
-  private URL = 'http://172.20.10.2:9428/api/sites';
+  private URL = serverUrl+'/api/sites';
    // private URL = 'http://localhost:9428/api/sites';
 
   constructor() {

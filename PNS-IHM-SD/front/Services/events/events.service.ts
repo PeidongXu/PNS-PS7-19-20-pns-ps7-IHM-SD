@@ -2,6 +2,7 @@
 import {BehaviorSubject} from 'rxjs';
 import {Event } from '../../Models/Event';
 import axios from 'axios'
+import {serverUrl} from "../../serverConfig/server.config";
 
 
 export class EventsService {
@@ -9,7 +10,7 @@ export class EventsService {
   public EventList: Event[] = [];
   public test: string = "ceci est un test";
 
-  private URL = 'http://172.20.10.2:9428/api/events';
+  private URL = serverUrl+'/api/events';
    // private URL = 'http://localhost:9428/api/events';
 
   constructor() {

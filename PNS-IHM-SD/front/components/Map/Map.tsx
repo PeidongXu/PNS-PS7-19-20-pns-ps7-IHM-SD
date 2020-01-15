@@ -9,6 +9,7 @@ import * as Permissions from 'expo-permissions';
 import styles from "./Style";
 import axios from "axios";
 import {Event} from "../../Models/Event";
+import {serverUrl} from "../../serverConfig/server.config";
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCYHUOtzZvpFD2nUeElqeVQ-Jp46KNGvyY';
 
@@ -50,9 +51,9 @@ class MapScreen extends Component {
 
   private URLGeneration () {
     if(this.props.navigation.getParam("TimeData")) {
-      return 'http://172.20.10.2:9428/api/events/' + this.props.navigation.getParam("TimeData");
+      return serverUrl+'/api/events/' + this.props.navigation.getParam("TimeData");
     }else{
-      return 'http://172.20.10.2:9428/api/events'
+      return serverUrl+'/api/events'
     }
 
   }
