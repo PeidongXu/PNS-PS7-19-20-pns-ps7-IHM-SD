@@ -125,6 +125,42 @@ router.get('/before', (req, res) => {
 });
 
 
+function checkRightNow(){
+  //https://stackoverflow.com/questions/36197031/how-to-use-moment-js-to-check-whether-the-current-time-is-between-2-times
+  var format = 'HH:mm'
+// var time = moment() gives you current time. no format required.
+  var time = moment()
+  let events = checkDate()
+  let filtredEvents= []
+  events.forEach((element) =>{
+    let beforeTime = moment(element.startHour, format)
+    let afterTime = moment(element.endHour, format)
+    console.log(beforeTime.format(format))
+    console.log(afterTime.format(format))
+    console.log(time.isBetween(beforeTime, afterTime))
+    if(time.isBetween(beforeTime, afterTime)) {
+      const tmpsite = Site.getById(element.siteID);
+      element['latitude'] = tmpsite.latitude;
+      element['longitude'] = tmpsite.longitude;
+      filtredEvents.push(element)
+    }
+  });
+  return filtredEvents;
+}
+
+router.get('/rightnow', (req, res) => {
+  try {
+    res.status(200).json(checkRightNow());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+
 router.post('/', (req, res) => {
   try {
     const event = Event.create(req.body);
@@ -139,11 +175,33 @@ router.post('/', (req, res) => {
 });
 
 /*FOR TEST ---> FRONT-BACK-PYTHON*/
-router.get('/testing', (req, res) => {
+router.get('/testing/', (req, res) => {
 
   var spawn = require("child_process").spawn;
 
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/yoga.jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
+
+  process.stdout.on('data', (data) => {
+    res.status(200).json(parseInt(data.toString(),10));
+  });
+
+  // Handle error output
+  process.stderr.on('data', (data) => {
+    res.status(401).json(data.toString());
+  });
+
+});
+
+function test(id){
+  return Event.getById(id).imagepython
+
+}
+router.get('/detection/:id', (req, res) => {
+
+  var spawn = require("child_process").spawn;
+  var image = test(req.params.id)
+
+  var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+image+".jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
     res.status(200).json(parseInt(data.toString(),10));

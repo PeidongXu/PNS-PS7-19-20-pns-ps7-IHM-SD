@@ -9,13 +9,15 @@ class Countdown extends Component {
             countdown:this.props.countdown
         }
     }
+
+
     render() {
         return (
+
         <View>
             <CountDown
                 until={this.state.countdown}
-                onFinish={() => alert('finished')}
-                onPress={() => alert('hello')}
+                onFinish={() => alert('already started')}
                 size={20}
             />
         </View>

@@ -10,4 +10,5 @@ module.exports = new BaseModel('Event', {
   title: Joi.string().required(),
   description: Joi.string().required(),
   image: Joi.string().required(),
+  imagepython: Joi.string().required(),
 });

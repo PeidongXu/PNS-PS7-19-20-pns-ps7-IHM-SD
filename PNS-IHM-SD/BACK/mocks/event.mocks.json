@@ -8,6 +8,7 @@
     "title": "Allemagne - Espagne",
     "description": "Match de Football équipe d'Allemagne contre l'équipe d'Espagne.",
     "image": "foot",
+    "imagepython": "soccer",
     "id": 1
   },
   {
@@ -19,6 +20,7 @@
     "title": "100 mètres haies",
     "description": "100 mètres haies",
     "image": "athle",
+    "imagepython": "yoga",
     "id": 2
   },
   {
@@ -30,6 +32,7 @@
     "title": "Saut en hauteur",
     "description": "Saut en hauteur",
     "image": "athle",
+    "imagepython": "yoga",
     "id": 3
   },
   {
@@ -41,6 +44,7 @@
     "title": "France - Suisse",
     "description": "Match de Tennis équipe de France contre l'équipe Suisse.",
     "image": "tennis",
+    "imagepython": "polytech",
     "id": 4
   },
   {
@@ -52,6 +56,7 @@
     "title": "France - Italie",
     "description": "Match de Basketball équipe de France contre l'équipe d'Italie.",
     "image": "basket",
+    "imagepython": "living_room",
     "id": 5
   },
   {
@@ -63,6 +68,19 @@
     "title": "18 trous",
     "description": "18 trous au golde de Polympic.",
     "image": "golf",
-    "id": 5
+    "imagepython": "polytech",
+    "id": 6
+  },
+  {
+    "siteID": 1,
+    "date": "15/01/2020",
+    "startHour": "08:00",
+    "endHour": "15:00",
+    "sport": "Golf",
+    "title": "18 trous",
+    "description": "18 trous au golde de Polympic.",
+    "image": "golf",
+    "imagepython": "polytech",
+    "id": 7
   }
 ]

@@ -61,10 +61,12 @@ class EventComponent extends Component{
         )
 
 
+
         return(
         <View>
             <View style={styles.center}>
                 <Image style={styles.picture} source={{ uri: '../../assets/sites/polytech.jpg' }} />
+
                 <Text style={styles.normal}>Starts in :  </Text>
                 <Countdown
                     countdown ={this.getCountdown()}
@@ -78,8 +80,10 @@ class EventComponent extends Component{
                 <Text style={styles.description}>You are {distance}m from the event</Text>
                 <Text style={styles.description}>{this.state.event.description}</Text>
             </View>
-            <View>
-                <About/>
+            <View style={styles.center}>
+                <About
+                    event = {this.state.event}
+                />
             </View>
         </View>
 

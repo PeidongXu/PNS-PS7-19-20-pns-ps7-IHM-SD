@@ -80,13 +80,13 @@ class Menu extends Component {
       </View>
     </TouchableOpacity>
   );
-  
-  
+
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {this.getItemNow("flag", "Right Now", 70, "#00ea75", "font-awesome","today")}
+          {this.getItemNow("flag", "Right Now", 70, "#00ea75", "font-awesome","rightnow")}
           {this.getItemDay("calendar", "Choose Day", 70, "#ffa54d", "font-awesome")}
           {this.getItem("flag-o", "Events Done", 40, "#66b3ff", "font-awesome", "before")}
           {this.getItem("flag-checkered", "Now", 40, "#66b3ff", "font-awesome","today")}

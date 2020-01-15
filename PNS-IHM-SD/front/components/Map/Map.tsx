@@ -11,7 +11,6 @@ import axios from "axios";
 import {Event} from "../../Models/Event";
 import {serverUrl} from "../../serverConfig/server.config";
 
-const GOOGLE_MAPS_APIKEY = 'AIzaSyCYHUOtzZvpFD2nUeElqeVQ-Jp46KNGvyY';
 
 class MapScreen extends Component {
   static navigationOptions = props => {
