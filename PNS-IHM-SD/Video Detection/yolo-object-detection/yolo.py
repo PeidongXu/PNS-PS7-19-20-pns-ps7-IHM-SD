@@ -136,5 +136,5 @@ if len(idxs) > 0:
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
 
-cv2.imwrite("images\\output_"+args["image"].split('/')[-1], image)
+cv2.imwrite("..\\..\\front\\assets\\imagesScript\\output_"+args["image"].split('/')[-1], image)
 cv2.waitKey(0)
