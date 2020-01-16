@@ -153,24 +153,27 @@ class EventsList extends Component{
             }
         }
         return (
-
+            <View>
             <View style={styles.row}>
                 <TouchableOpacity onPress={() => this.openModal(item)}>
-                <Image style={styles.picture} source={icon} />
                 <View>
-                    <Text style={styles.primaryText}>{item.title}</Text>
-                    <Text style={styles.secondaryText}>{item.description}</Text>
+                    <Image style={styles.picture} source={icon} />
+                    <View>
+                        <Text style={styles.primaryText}>{item.title}</Text>
+                        <Text style={styles.secondaryText}>{item.description}</Text>
+                    </View>
                 </View>
                 </TouchableOpacity>
-                <View
-                    style={{
-                    height: 1,
-                    width: "86%",
-                    backgroundColor: "#CED0CE",
-                    marginLeft: "14%"
-                    }}
-                />
             </View>
+            <View
+                style={{
+                height: 1,
+                width: "86%",
+                backgroundColor: "#CED0CE",
+                marginLeft: "14%"
+                }}
+            />
+        </View>
         );
     };
 
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
     modalContainer: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: 'white',
     },
     innerContainer: {
         alignItems: 'center',
@@ -249,8 +252,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     row: { flexDirection: 'row', alignItems: 'center', padding: 12 },
-    picture: { width: 50, height: 50, borderRadius: 25, marginRight: 18 },
+    picture: { flex: 1, width: 50, height: 50, borderRadius: 25, marginRight: 18 },
     primaryText: {
+        flex: 1,
         fontWeight: 'bold',
         fontSize: 14,
         color: 'black',
