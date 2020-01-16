@@ -7,7 +7,9 @@ import numpy as np
 import argparse
 import imutils
 import cv2
-
+import sys
+import time
+import os
 # calculate the location of the mid point 
 
 
@@ -50,7 +52,9 @@ refObj = None
 # 循环遍历每一个轮廓点
 for c in cnts:
     # 过滤点太小的轮廓点
-    if cv2.contourArea(c) < 2000:
+    print("this size:")
+    print(cv2.contourArea(c))
+    if cv2.contourArea(c) < 20000:
         continue
 
     # 计算最小的外接矩形
@@ -59,8 +63,8 @@ for c in cnts:
     box = np.array(box, dtype="int")
     
     # 对轮廓点进行排序
-    box = perspective.order_points(box)
-
+    #box = perspective.order_points(box)
+    
     # 计算BB的中心点
     cX = np.average(box[:, 0])
     cY = np.average(box[:, 1])
@@ -76,13 +80,14 @@ for c in cnts:
         D = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
         # 获取计算结果
         refObj = (box, (cX, cY), D / args["width"])
-        
+    
     
     # 绘制轮廓
     orig = image.copy()
     cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
     cv2.drawContours(orig, [refObj[0].astype("int")], -1, (0, 255, 0), 2)
     cv2.imwrite("orig.jpg",orig)
+    
     # 进行坐标堆叠
     refCoords = np.vstack([refObj[0], refObj[1]])
     objCoords = np.vstack([box, (cX, cY)])
