@@ -119,14 +119,19 @@ if len(idxs) > 0:
 			0.5, color, 2)
 
 
+
+
+
 #Give Number of persons
 smith_a=0
 if len(idxs) > 0:
 	# loop over the indexes we are keeping
 	for i in idxs.flatten():
-		print(idxs.flatten)
+		
 		if LABELS[classIDs[i]]=="person":
 			smith_a=smith_a+1
+
+
 
 
 # show the output image
@@ -134,6 +139,7 @@ if len(idxs) > 0:
 print(smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
-
+cv2.imshow("Image", image)
+cv2.imwrite("testyolo.jpg",image)
 cv2.imwrite("..\\..\\front\\assets\\imagesScript\\output_"+args["image"].split('/')[-1], image)
 cv2.waitKey(0)

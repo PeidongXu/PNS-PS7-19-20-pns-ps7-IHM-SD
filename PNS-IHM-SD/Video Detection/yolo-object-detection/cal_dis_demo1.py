@@ -7,9 +7,7 @@ import numpy as np
 import argparse
 import imutils
 import cv2
-import sys
-import time
-import os
+
 # calculate the location of the mid point 
 
 
@@ -80,14 +78,13 @@ for c in cnts:
         D = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
         # 获取计算结果
         refObj = (box, (cX, cY), D / args["width"])
-    
+        
     
     # 绘制轮廓
     orig = image.copy()
     cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
     cv2.drawContours(orig, [refObj[0].astype("int")], -1, (0, 255, 0), 2)
     cv2.imwrite("orig.jpg",orig)
-    
     # 进行坐标堆叠
     refCoords = np.vstack([refObj[0], refObj[1]])
     objCoords = np.vstack([box, (cX, cY)])
