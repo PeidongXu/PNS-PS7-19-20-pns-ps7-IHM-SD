@@ -9,6 +9,7 @@
     "description": "Match de Football équipe d'Allemagne contre l'équipe d'Espagne.",
     "image": "foot",
     "imagepython": "soccer",
+    "test": ["polytech","yoga","soccer"],
     "id": 1
   },
   {
@@ -21,6 +22,7 @@
     "description": "100 mètres haies",
     "image": "athle",
     "imagepython": "yoga",
+    "test": ["polytech","yoga","soccer"],
     "id": 2
   },
   {
@@ -33,6 +35,7 @@
     "description": "Saut en hauteur",
     "image": "athle",
     "imagepython": "yoga",
+    "test": ["polytech","yoga","soccer"],
     "id": 3
   },
   {
@@ -45,6 +48,7 @@
     "description": "Match de Tennis équipe de France contre l'équipe Suisse.",
     "image": "tennis",
     "imagepython": "polytech",
+    "test": ["polytech","yoga","soccer"],
     "id": 4
   },
   {
@@ -57,6 +61,7 @@
     "description": "Match de Basketball équipe de France contre l'équipe d'Italie.",
     "image": "basket",
     "imagepython": "living_room",
+    "test": ["polytech","yoga","soccer"],
     "id": 5
   },
   {
@@ -69,6 +74,7 @@
     "description": "18 trous au golde de Polympic.",
     "image": "golf",
     "imagepython": "polytech",
+    "test": ["polytech","yoga","soccer"],
     "id": 6
   },
   {
@@ -81,6 +87,8 @@
     "description": "18 trous au golde de Polympic.",
     "image": "golf",
     "imagepython": "polytech",
+    "test": ["polytech","yoga","soccer"],
     "id": 7
   }
 ]
+

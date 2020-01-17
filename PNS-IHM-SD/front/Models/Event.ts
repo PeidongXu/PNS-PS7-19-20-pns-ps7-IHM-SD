@@ -10,5 +10,6 @@ export interface Event {
     description:string
     image:string
     imagepython:string
+    test:string[]
 
 }

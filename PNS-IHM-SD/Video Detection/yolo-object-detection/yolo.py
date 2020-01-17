@@ -127,16 +127,18 @@ smith_a=0
 if len(idxs) > 0:
 	# loop over the indexes we are keeping
 	for i in idxs.flatten():
-		
+
 		if LABELS[classIDs[i]]=="person":
 			smith_a=smith_a+1
 
 
 #save image --- Path from server not from .py program
 #here is path from py.file : ../../front/assets/imagesScript/output_"+args["image"].split('/')[-1]
-cv2.imwrite("../front/assets/imagesScript/output_"+args["image"].split('/')[-1], image)
+#cv2.imwrite("../front/assets/imagesScript/output_"+args["image"].split('/')[-1], image)
 
 # show the output image
+cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
+
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
 

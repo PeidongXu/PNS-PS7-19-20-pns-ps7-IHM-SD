@@ -22,7 +22,7 @@ class MapScreen extends Component {
     this.state = {
       location: null,
       errorMessage: null,
-      events:[],
+      events:[]
   };
 }
 
@@ -95,7 +95,6 @@ class MapScreen extends Component {
             latitudeDelta: 0.03,
             longitudeDelta: 0.01,
           }}>
-
           {this.state.events.map(event => (
               <Marker
                   coordinate={{ latitude: event.latitude, longitude: event.longitude }}
@@ -108,5 +107,13 @@ class MapScreen extends Component {
     );
   }
 }
+//multiple markers from array
+/*{this.state.events.map(event => (
+    <Marker
+        coordinate={{ latitude: event.latitude, longitude: event.longitude }}
+        title={event.title}
+        description={event.description}
+    />
+))}*/
 
 export default MapScreen;
