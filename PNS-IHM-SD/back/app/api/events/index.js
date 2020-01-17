@@ -44,13 +44,93 @@ function checkDate(){
       filtredEvents.push(element)
     }
   });
-
+  filtredEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
   return filtredEvents;
 }
 
 router.get('/today', (req, res) => {
   try {
     res.status(200).json(checkDate());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+function checkTodayNotStarted(){
+  var format = 'HH:mm'
+// var time = moment() gives you current time. no format required.
+  var now = moment()
+  let events = checkDate()
+  let filtredEvents= []
+  events.forEach((element) =>{
+    let beforeTime = moment(element.startHour, format)
+    //console.log(afterTime.format(format))
+    //console.log(moment(afterTime).isBefore(now))
+    // console.log(now.isAfter( afterTime))
+    if(beforeTime.isAfter( now)) {
+      const tmpsite = Site.getById(element.siteID);
+      element['latitude'] = tmpsite.latitude;
+      element['longitude'] = tmpsite.longitude;
+      filtredEvents.push(element)
+    }
+  });
+
+  filtredEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
+
+  return filtredEvents;
+}
+
+router.get('/today/notstarted', (req, res) => {
+  try {
+    res.status(200).json(checkTodayNotStarted());
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+function checkTodayFinish(){
+  var format = 'HH:mm'
+// var time = moment() gives you current time. no format required.
+  var now = moment()
+  let events = checkDate()
+  let filtredEvents= []
+  events.forEach((element) =>{
+    let afterTime = moment(element.endHour, format)
+    //console.log(afterTime.format(format))
+    //console.log(moment(afterTime).isBefore(now))
+   // console.log(now.isAfter( afterTime))
+    if(now.isAfter( afterTime)) {
+      const tmpsite = Site.getById(element.siteID);
+      element['latitude'] = tmpsite.latitude;
+      element['longitude'] = tmpsite.longitude;
+      filtredEvents.push(element)
+    }
+  });
+
+  filtredEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
+
+  return filtredEvents;
+}
+
+router.get('/today/finish', (req, res) => {
+  try {
+    res.status(200).json(checkTodayFinish());
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
@@ -145,9 +225,9 @@ function checkRightNow(){
   events.forEach((element) =>{
     let beforeTime = moment(element.startHour, format)
     let afterTime = moment(element.endHour, format)
-    console.log(beforeTime.format(format))
-    console.log(afterTime.format(format))
-    console.log(time.isBetween(beforeTime, afterTime))
+   // console.log(beforeTime.format(format))
+    //console.log(afterTime.format(format))
+    //console.log(time.isBetween(beforeTime, afterTime))
     if(time.isBetween(beforeTime, afterTime)) {
       const tmpsite = Site.getById(element.siteID);
       element['latitude'] = tmpsite.latitude;
@@ -155,6 +235,12 @@ function checkRightNow(){
       filtredEvents.push(element)
     }
   });
+
+  filtredEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
+
   return filtredEvents;
 }
 

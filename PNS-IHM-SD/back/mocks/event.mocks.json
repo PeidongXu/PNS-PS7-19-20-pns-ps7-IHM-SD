@@ -79,9 +79,9 @@
   },
   {
     "siteID": 1,
-    "date": "15/01/2020",
-    "startHour": "08:00",
-    "endHour": "15:00",
+    "date": "17/01/2020",
+    "startHour": "17:00",
+    "endHour": "21:00",
     "sport": "Golf",
     "title": "18 trous",
     "description": "18 trous au golde de Polympic.",
@@ -89,6 +89,19 @@
     "imagepython": "polytech",
     "test": ["polytech","yoga","soccer"],
     "id": 7
+  },
+  {
+    "siteID": 2,
+    "date": "17/01/2020",
+    "startHour": "08:00",
+    "endHour": "16:00",
+      "sport": "Football",
+    "title": "France - Italie",
+    "description": "Finale de CDM.",
+    "image": "foot",
+    "imagepython": "soccer",
+    "test": ["polytech","yoga","soccer"],
+    "id": 8
   }
 ]
 

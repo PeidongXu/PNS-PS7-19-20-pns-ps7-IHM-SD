@@ -95,7 +95,7 @@ for output in layerOutputs:
 			# update our list of bounding box coordinates, confidences,
 			# and class IDs
 			boxes.append([x, y, int(width), int(height)])
-			
+
 			confidences.append(float(confidence))
 			classIDs.append(classID)
 
@@ -113,9 +113,9 @@ def calculate_distance(x1,y1,x2,y2):
 	return distance
 #find group member
 
-		
 
-#find the group 
+
+#find the group
 for i in idxs.flatten():
 	if LABELS[classIDs[i]]=="person":
 		group_list.setdefault(i,[]).append(i)
@@ -127,7 +127,7 @@ for i in idxs.flatten():
 					distance_list.append(dis)
 
 
-# draw a bounding box rectangle on all of the groups 
+# draw a bounding box rectangle on all of the groups
 
 for i in group_list:
 	if len(group_list[i])>1 and  LABELS[classIDs[i]]=="person" :
@@ -143,7 +143,7 @@ for i in group_list:
 			(x,y) = (boxes[j][0], boxes[j][1])
 			cv2.circle(image, (x, y), 10, group_color, 0)
 		cv2.circle(image, (x, y), 30, (0,0,255), 0)
-		#print (x,y,w,h)	
+		#print (x,y,w,h)
 		group_color=(0,0,255)
 		#cv2.rectangle(image, (x, y), (x + w, y + h), group_color, 2)
 
@@ -156,7 +156,7 @@ if len(idxs) > 0:
 			(x, y) = (boxes[i][0], boxes[i][1])
 			(w, h) = (boxes[i][2], boxes[i][3])
 			point_color=(0,0,255)
-			
+
 
 			# draw a bounding box rectangle and label on the image
 			color = [int(c) for c in COLORS[classIDs[i]]]
@@ -174,19 +174,25 @@ smith_a=0
 if len(idxs) > 0:
 	# loop over the indexes we are keeping
 	for i in idxs.flatten():
-		
+
 		if LABELS[classIDs[i]]=="person":
 			smith_a=smith_a+1
 
 
 
+#save image --- Path from server not from .py program
+#here is path from py.file : ../../front/assets/imagesScript/output_"+args["image"].split('/')[-1]
+#cv2.imwrite("../front/assets/imagesScript/output_"+args["image"].split('/')[-1], image)
+
+# show the output image
+#cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
 
 # show the output image
 
 #print(smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
-cv2.imshow("Image", image)
+#cv2.imshow("Image", image)
 cv2.imwrite("testyolo.jpg",image)
-cv2.imwrite("..\\..\\front\\assets\\imagesScript\\output_"+args["image"].split('/')[-1], image)
+cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
 cv2.waitKey(0)

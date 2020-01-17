@@ -84,7 +84,7 @@ class EventComponent extends Component{
         const now = date.toLocaleDateString() + " "+ date.toLocaleTimeString();
        // console.log(now)
         const then = this.state.event.date + " " + this.state.event.startHour;
-       // console.log(then)
+        console.log(then)
         const duration = moment(then,"DD/MM/YYYY HH:mm").diff(moment(now,"DD/MM/YYYY HH:mm")) / 1000
        //  console.log(duration)
         this.state.countdown = duration
