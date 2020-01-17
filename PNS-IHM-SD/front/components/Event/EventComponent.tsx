@@ -4,7 +4,7 @@ import {
     Text, TouchableOpacity,
     View,
     Dimensions,
-    Image,
+    Image, Animated,
 
 } from 'react-native';
 import {Event } from '../../Models/Event';
@@ -12,6 +12,8 @@ import Countdown from "../countdown/countdown"
 import About from "../About/About"
 import moment from "moment"
 import * as geolib from "geolib";
+import images from "../../assets/sites/images";
+import {serverUrl} from "../../serverConfig/server.config";
 
 
 class EventComponent extends Component{
@@ -20,12 +22,54 @@ class EventComponent extends Component{
         this.state = {
             event: this.props.event,
             location: this.props.location,
-            countdown:null
+            countdown:null,
+            image: this.props.event.test[0],
+            imageToUse :this.props.event.test[0],
+            count:"0"
         }
+
     }
     componentDidMount() {
         this.getCountdown();
+        this.changeImage();
     }
+    delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
+    runScript = async () => {
+        //GET request
+        await fetch(serverUrl+'/api/events/detection/'+this.state.imageToUse, {
+            //await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
+            method: 'GET'
+            //Request Type
+        })
+            .then((response) => response.json())
+            //If response is in json then in success
+            .then((responseJson) => {
+                //Success
+                //  console.log(responseJson);
+               // alert("Il y a "+ JSON.stringify(responseJson) + " personne(s) à cet event");
+                this.setState({count:JSON.stringify(responseJson)})
+            })
+            //If response is not in json then in error
+            .catch((error) => {
+                //Error
+                alert(JSON.stringify(error));
+                console.error(error);
+            });
+
+    }
+
+
+    private async changeImage() {
+        for (const element of this.state.event.test) {
+            this.setState({imageToUse:element})
+            await this.runScript();
+            this.setState({image:element})
+        }
+    }
+
 
     private getCountdown(){
        /* const now = new Date();
@@ -50,24 +94,20 @@ class EventComponent extends Component{
 
 
     render(){
-       /* console.log("distance: "+geolib.getPreciseDistance(
-            { latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude },
-            { latitude: this.state.event.latitude, longitude: this.state.event.longitude }
-        ))*/
 
         const distance = geolib.getPreciseDistance(
             { latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude },
             { latitude: this.state.event.latitude, longitude: this.state.event.longitude }
-        )
-
+        );
 
 
         return(
         <View>
             <View style={styles.center}>
-                <Image style={styles.picture} source={require('./../../assets/sites/polytech.jpg')} />
-
+                <Image style={styles.picture} source={images[this.state.image]} />
+                <Text> {this.state.count}</Text>
                 <Text style={styles.normal}>Starts in :  </Text>
+
                 <Countdown
                     countdown ={this.getCountdown()}
                 />

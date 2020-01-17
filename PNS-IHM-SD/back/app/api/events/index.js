@@ -77,6 +77,11 @@ function checkAfterDate(){
       filtredEvents.push(element)
     }
   });
+
+  filtredEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
   return filtredEvents;
 }
 
@@ -109,6 +114,11 @@ function checkBeforeDate(){
       filtredEvents.push(element)
     }
   });
+  filtredEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
+
   return filtredEvents;
 }
 
@@ -199,9 +209,9 @@ function test(id){
 router.get('/detection/:id', (req, res) => {
 
   var spawn = require("child_process").spawn;
-  var image = test(req.params.id)
+ // var image = test(req.params.id)
 
-  var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+image+".jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
+  var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+req.params.id+".jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
     res.status(200).json(parseInt(data.toString(),10));

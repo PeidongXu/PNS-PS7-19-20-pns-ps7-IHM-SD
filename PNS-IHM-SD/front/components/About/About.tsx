@@ -14,7 +14,7 @@ class About extends Component{
     }
     _onPressButton = async () => {
         //GET request
-        await fetch(serverUrl+'/api/events/detection/'+this.state.event.id, {
+        await fetch(serverUrl+'/api/events/detection/'+this.state.event.test[0], {
         //await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
             method: 'GET'
             //Request Type

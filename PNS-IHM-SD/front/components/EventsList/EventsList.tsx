@@ -13,35 +13,10 @@ import {EventsService} from '../../Services/events' ;
 import {Event } from '../../Models/Event';
 import axios from "axios";
 import EventComponent from "../Event/EventComponent";
-import About from "../About/About";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import * as geolib from "geolib";
+import images from "../../assets/sites/images";
 
-const DATA = [
-    {
-        "siteID": 1,
-        "date": "10-01-2020",
-        "startHour": "18:00",
-        "endHour": "20:00",
-        "sport": "foot",
-        "title": "test1",
-        "description": "match de foot",
-        "image": "foot",
-        "id": 1578661732220
-    },
-    {
-        "siteID": 1,
-        "date": "10-01-2020",
-        "startHour": "18:00",
-        "endHour": "20:00",
-        "sport": "foot",
-        "title": "test2",
-        "description": "match de foot",
-        "image": "foot",
-        "id": 1578661732221
-    },
-];
 
 
 function Item({event}) {
@@ -121,44 +96,15 @@ class EventsList extends Component{
 
 
     renderItem = ({ item }) => {
-        let icon
-        switch(item.image) {
-            case "athle": {
-                icon = require('./../../assets/sites/athle.jpg')
-                break;
-            }
-            case "basket": {
-                icon = require('./../../assets/sites/basket.jpg')
-                break;
-            }
-            case "foot": {
-                icon = require('./../../assets/sites/foot.jpg')
-                break;
-            }
-            case "golf": {
-                icon = require('./../../assets/sites/golf.jpg')
-                break;
-            }
-            case "hand": {
-                icon = require('./../../assets/sites/hand.jpg')
-                break;
-            }
-            case "tennis": {
-                icon = require('./../../assets/sites/tennis.jpg')
-                break;
-            }
-            default: {
-                icon = require('./../../assets/sites/polytech.jpg')
-                break;
-            }
-        }
         return (
             <View>
             <View style={styles.row}>
                 <TouchableOpacity onPress={() => this.openModal(item)}>
                 <View>
-                    <Image style={styles.picture} source={icon} />
+                    <Image style={styles.picture} source={images[item.image]} />
                     <View>
+                        <Text style={styles.primaryText}>{item.date}</Text>
+                        <Text style={styles.primaryText}>{item.startHour}</Text>
                         <Text style={styles.primaryText}>{item.title}</Text>
                         <Text style={styles.secondaryText}>{item.description}</Text>
                     </View>
