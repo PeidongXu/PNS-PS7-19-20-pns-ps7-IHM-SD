@@ -132,14 +132,12 @@ if len(idxs) > 0:
 			smith_a=smith_a+1
 
 
-
+#save image --- Path from server not from .py program
+#here is path from py.file : ../../front/assets/imagesScript/output_"+args["image"].split('/')[-1]
+cv2.imwrite("../front/assets/imagesScript/output_"+args["image"].split('/')[-1], image)
 
 # show the output image
-
-print(smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
-cv2.imshow("Image", image)
-cv2.imwrite("testyolo.jpg",image)
-cv2.imwrite("..\\..\\front\\assets\\imagesScript\\output_"+args["image"].split('/')[-1], image)
+
 cv2.waitKey(0)
