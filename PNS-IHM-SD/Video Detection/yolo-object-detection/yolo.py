@@ -136,11 +136,13 @@ for i in group_list:
 		w=0
 		h = 0
 		group_color=(0,100,200)
-		cv2.circle(image, (x, y), 80, group_color, 0)
+		cv2.circle(image, (x, y), 10, group_color, 0)
+		cv2.circle(image, (x, y), 30, (0,0,255), 0)
 		#(w,h) = (boxes[i][2], boxes[i][3])
 		for j in group_list[i]:
-			w = boxes[j][2]+w
-			h = boxes[j][3]+h
+			(x,y) = (boxes[j][0], boxes[j][1])
+			cv2.circle(image, (x, y), 10, group_color, 0)
+		cv2.circle(image, (x, y), 30, (0,0,255), 0)
 		#print (x,y,w,h)	
 		group_color=(0,0,255)
 		#cv2.rectangle(image, (x, y), (x + w, y + h), group_color, 2)
@@ -154,7 +156,7 @@ if len(idxs) > 0:
 			(x, y) = (boxes[i][0], boxes[i][1])
 			(w, h) = (boxes[i][2], boxes[i][3])
 			point_color=(0,0,255)
-			cv2.circle(image, (x, y), 10, point_color, 0)
+			
 
 			# draw a bounding box rectangle and label on the image
 			color = [int(c) for c in COLORS[classIDs[i]]]
