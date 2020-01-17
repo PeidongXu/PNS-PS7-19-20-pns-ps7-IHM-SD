@@ -66,7 +66,7 @@ end = time.time()
 boxes = []
 confidences = []
 classIDs = []
-
+group_list = {}
 # loop over each of the layer outputs
 for output in layerOutputs:
 	# loop over each of the detections
@@ -95,6 +95,7 @@ for output in layerOutputs:
 			# update our list of bounding box coordinates, confidences,
 			# and class IDs
 			boxes.append([x, y, int(width), int(height)])
+			
 			confidences.append(float(confidence))
 			classIDs.append(classID)
 
@@ -102,21 +103,65 @@ for output in layerOutputs:
 # boxes
 idxs = cv2.dnn.NMSBoxes(boxes, confidences, args["confidence"],
 	args["threshold"])
+import math
+distance_list=[]
+def calculate_distance(x1,y1,x2,y2):
+	d_x = x2 - x1
+	d_y = y2 - y1
+	#calculata the distance between the two point
+	distance = math.sqrt(d_x**2 + d_y**2)
+	return distance
+#find group member
+
+		
+
+#find the group 
+for i in idxs.flatten():
+	if LABELS[classIDs[i]]=="person":
+		group_list.setdefault(i,[]).append(i)
+		for j in range(i+1,len(boxes)):
+			if LABELS[classIDs[j]]=="person":
+				dis = calculate_distance(boxes[i][0], boxes[i][1],boxes[j][0], boxes[j][1])
+				if dis <= boxes[i][2]+20 or dis <=boxes[j][2]+20 :
+					group_list[i].append(j)
+					distance_list.append(dis)
+
+
+# draw a bounding box rectangle on all of the groups 
+
+for i in group_list:
+	if len(group_list[i])>1 and  LABELS[classIDs[i]]=="person" :
+		#print(group_list[i])
+		(x,y) = (boxes[i][0], boxes[i][1])
+		w=0
+		h = 0
+		group_color=(0,100,200)
+		cv2.circle(image, (x, y), 80, group_color, 0)
+		#(w,h) = (boxes[i][2], boxes[i][3])
+		for j in group_list[i]:
+			w = boxes[j][2]+w
+			h = boxes[j][3]+h
+		#print (x,y,w,h)	
+		group_color=(0,0,255)
+		#cv2.rectangle(image, (x, y), (x + w, y + h), group_color, 2)
 
 # ensure at least one detection exists
 if len(idxs) > 0:
 	# loop over the indexes we are keeping
 	for i in idxs.flatten():
-		# extract the bounding box coordinates
-		(x, y) = (boxes[i][0], boxes[i][1])
-		(w, h) = (boxes[i][2], boxes[i][3])
+		if LABELS[classIDs[j]]=="person":
+			# extract the bounding box coordinates
+			(x, y) = (boxes[i][0], boxes[i][1])
+			(w, h) = (boxes[i][2], boxes[i][3])
+			point_color=(0,0,255)
+			cv2.circle(image, (x, y), 10, point_color, 0)
 
-		# draw a bounding box rectangle and label on the image
-		color = [int(c) for c in COLORS[classIDs[i]]]
-		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
-			0.5, color, 2)
+			# draw a bounding box rectangle and label on the image
+			color = [int(c) for c in COLORS[classIDs[i]]]
+			cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+			text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
+			cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
+				0.5, color, 2)
 
 
 
@@ -136,7 +181,7 @@ if len(idxs) > 0:
 
 # show the output image
 
-print(smith_a)
+#print(smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
 cv2.imshow("Image", image)
