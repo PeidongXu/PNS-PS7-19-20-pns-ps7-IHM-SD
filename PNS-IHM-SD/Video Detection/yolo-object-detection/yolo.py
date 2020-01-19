@@ -113,9 +113,9 @@ def calculate_distance(x1,y1,x2,y2):
 	return distance
 #find group member
 
+group_set=[]
 
-
-#find the group
+#find the group 
 for i in idxs.flatten():
 	if LABELS[classIDs[i]]=="person":
 		group_list.setdefault(i,[]).append(i)
@@ -127,14 +127,17 @@ for i in idxs.flatten():
 					distance_list.append(dis)
 
 
-# draw a bounding box rectangle on all of the groups
-
+# draw a bounding box rectangle on all of the groups 
+#print(group_list)
 for i in group_list:
 	if len(group_list[i])>1 and  LABELS[classIDs[i]]=="person" :
+
 		#print(group_list[i])
 		(x,y) = (boxes[i][0], boxes[i][1])
 		w=0
 		h = 0
+		group_set.append(group_list[i])
+		#group_set.setdefault(i,[]).append(i)
 		group_color=(0,100,200)
 		cv2.circle(image, (x, y), 10, group_color, 0)
 		cv2.circle(image, (x, y), 30, (0,0,255), 0)
@@ -146,6 +149,41 @@ for i in group_list:
 		#print (x,y,w,h)
 		group_color=(0,0,255)
 		#cv2.rectangle(image, (x, y), (x + w, y + h), group_color, 2)
+#print(group_set)
+
+#split the group  modify by peidong 17/01/2020 17:13
+def sort_group(groups):
+	#group_set =  [ [1,2,3],[4,5,6],[3,4],[7,8],[8,9],[6,12,13] ]
+	l = len(groups)
+	for i in range(l):
+		for j in range(l):
+			x = list(set(groups[i]+groups[j]))
+			y = len(groups[j])+len(groups[i])
+			if i == j or groups[i] == 0 or groups[j] == 0:
+				break
+			elif len(x) < y:
+				groups[i] = x
+				groups[j] = [0]
+				#print group_set
+	#print ([i for i in groups if i is not [0]])
+
+	nb_group = l
+	for i in range(l):
+		max = 0
+		if len(groups[i]) == 1:
+			nb_group= nb_group - 1
+		if len(groups[i])>max:
+			max = len(groups[i])
+
+	#print(nb_group)
+	print("the number of group is (%d)" %(nb_group))
+	print("the largest number of people is (%d)" %max)# the largest number of people in one group
+
+
+
+groups = sort_group(group_set)
+
+#print (groups)
 
 # ensure at least one detection exists
 if len(idxs) > 0:
@@ -189,7 +227,7 @@ if len(idxs) > 0:
 
 # show the output image
 
-#print(smith_a)
+print("the number of people is %d" %smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
 #cv2.imshow("Image", image)
