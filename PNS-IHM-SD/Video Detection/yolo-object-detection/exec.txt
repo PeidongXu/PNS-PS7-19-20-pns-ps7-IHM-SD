@@ -13,3 +13,7 @@ python yolo.py --image images/baggage_claim.jpg --yolo yolo-coco
 
 #OUTPUT
 Le nombre de personne sur l'image (dans le terminal)
+
+#TEST PEOPLE COUNT
+
+python test_people_count.py
