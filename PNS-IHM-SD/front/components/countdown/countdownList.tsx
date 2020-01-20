@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CountDown from 'react-native-countdown-component';
 import { View } from 'native-base';
 
-class Countdown extends Component {
+class CountdownList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,16 +17,18 @@ class Countdown extends Component {
                 <CountDown
                     until={this.state.countdown}
                     //onFinish={() => alert('already started')}
-                    size={20}
+                    size={13}
                     timeToShow={['D', 'H', 'M']}
-                //timeLabels={{d:'DD', h:"HH", m: 'MM'}}
-                //showSeparator ="fasle"
-                //digitStyle= {{backgroundColor: 'none'}}
-                //digitTxtStyle= {{color: "white"}}
+                    //timeLabels={{d:'DD', h:"HH", m: 'MM'}}
+                    //showSeparator ="fasle"
+                    digitStyle={{ backgroundColor: 'none' }}
+                    digitTxtStyle={{ color: "white" }}
+                    timeLabelStyle={{ color: "white" }}
+
                 />
             </View>
         );
     }
 }
 
-export default Countdown;
+export default CountdownList;

@@ -72,12 +72,14 @@ class MapScreen extends Component {
 
   render() {
     let text = 'Waiting..';
+    let myLatitude = 43.615692;
+    let myLongitude = 7.071778;
     if (this.state.errorMessage) {
       text = this.state.errorMessage;
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
-      const myLatitude = this.state.location.coords.latitude;
-      const myLongitude = this.state.location.coords.longitude;
+      myLatitude = this.state.location.coords.latitude;
+      myLongitude = this.state.location.coords.longitude;
     }
    /* console.log("distance: "+geolib.getPreciseDistance(
       { latitude: 43.615560, longitude: 7.071767 },

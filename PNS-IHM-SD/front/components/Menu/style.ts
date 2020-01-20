@@ -9,7 +9,7 @@ export default StyleSheet.create({
   iconContainer: {
     width: "100%",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   iconStyle: {
     flexDirection: "column",

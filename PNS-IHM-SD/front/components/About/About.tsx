@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import axios from 'axios';
 import { Button } from "react-native-elements";
-import {serverUrl} from "../../serverConfig/server.config";
+import { serverUrl } from "../../serverConfig/server.config";
 
-class About extends Component{
+class About extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             event: this.props.event
@@ -14,8 +14,8 @@ class About extends Component{
     }
     _onPressButton = async () => {
         //GET request
-        await fetch(serverUrl+'/api/events/detection/'+this.state.event.test[0], {
-        //await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
+        await fetch(serverUrl + '/api/events/detection/' + this.state.event.test[0], {
+            //await fetch('http://172.20.10.2:9428/api/events/detection/'+this.state.event.id, {
             method: 'GET'
             //Request Type
         })
@@ -23,8 +23,8 @@ class About extends Component{
             //If response is in json then in success
             .then((responseJson) => {
                 //Success
-              //  console.log(responseJson);
-                alert("Il y a "+ JSON.stringify(responseJson) + " personne(s) à cet event");
+                //  console.log(responseJson);
+                alert("Il y a " + JSON.stringify(responseJson) + " personne(s) à cet event");
             })
             //If response is not in json then in error
             .catch((error) => {
@@ -46,14 +46,14 @@ class About extends Component{
                 alert(JSON.stringify(response.data));
             });
     }*/
-    render(){
-        return(
-            <View  style={styles.view}>
-            <Button
-                title="How many people ? "
-                icon={{name:'search'}}
-                onPress={this._onPressButton}
-            />
+    render() {
+        return (
+            <View style={styles.view}>
+                <Button
+                    title="How many people ? "
+                    icon={{ name: 'search' }}
+                    onPress={this._onPressButton}
+                />
             </View>
         )
     }
@@ -62,7 +62,7 @@ export default About;
 
 const styles = StyleSheet.create({
 
-    view:{
+    view: {
         margin: 20,
     }
 })
