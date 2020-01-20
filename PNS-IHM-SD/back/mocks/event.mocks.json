@@ -9,7 +9,7 @@
     "description": "Match de Football équipe d'Allemagne contre l'équipe d'Espagne.",
     "image": "foot",
     "imagepython": "soccer",
-    "test": ["polytech","yoga","soccer"],
+    "test": ["polytech1","polytech2","polytech3","polytech4", "polytech5", "polytech6","polytech7", "polytech8","polytech9", "polytech10"],
     "id": 1
   },
   {
@@ -22,7 +22,7 @@
     "description": "100 mètres haies",
     "image": "athle",
     "imagepython": "yoga",
-    "test": ["polytech","yoga","soccer"],
+    "test": ["polytech1","polytech2","polytech3","polytech4", "polytech5", "polytech6","polytech7", "polytech8","polytech9", "polytech10"],
     "id": 2
   },
   {
