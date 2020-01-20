@@ -9,7 +9,11 @@ import Finder from "../../components/Finder/Finder";
 import MapScreen from "../../components/Map/Map";
 import MapEvent from "../../components/Map/MapEvent"
 import SliderDay from "../Filter/SliderDay"
-//Screen in the Home tab
+
+/**
+ * Déclaration des routes avec un alias
+ * Exemple:  Alias : component
+ */
 const DashboardContainer = createStackNavigator(
   {
     Home: Finder,
@@ -21,7 +25,10 @@ const DashboardContainer = createStackNavigator(
     initialRouteName: "Home"
   }
 );
-//The Main Tab =>Home - Profile  add more tabs here..
+
+/**
+ * Création de la navigation en bas de page
+ */
 const bottomTab = createBottomTabNavigator(
   {
     Home: {
@@ -64,7 +71,10 @@ const bottomTab = createBottomTabNavigator(
     }
   }
 );
-//Getting the tab header title
+
+/**
+ * Get Nom de Tab pour le Titre de la page 
+ */
 bottomTab.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
   const headerTitle = routeName;
@@ -73,7 +83,9 @@ bottomTab.navigationOptions = ({ navigation }) => {
   };
 };
 
-//Root navigator
+/**
+ * Root Navigation
+ */
 const AppNavigator = createStackNavigator(
   {
     Home: bottomTab

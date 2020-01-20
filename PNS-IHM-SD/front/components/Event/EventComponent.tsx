@@ -26,10 +26,18 @@ class EventComponent extends Component {
         this.getCountdown();
         this.changeImage();
     }
+    /**
+     * gérantion d'un delay pour les requets en millisecondes
+     * 
+     * @param ms 
+     */
     delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    /**
+     * Run du script de détection du nombre de personne avec une requet dans le back
+     */
     runScript = async () => {
         //GET request
         await fetch(serverUrl + '/api/events/detection/' + this.state.imageToUse, {
@@ -54,7 +62,10 @@ class EventComponent extends Component {
 
     }
 
-
+    /**
+     * Update des images dans l'evenement
+     * Exec le scrip de comptage de personne
+     */
     private async changeImage() {
         for (const element of this.state.event.test) {
             this.setState({ imageToUse: element })
@@ -63,7 +74,9 @@ class EventComponent extends Component {
         }
     }
 
-
+    /**
+     * Initalisation des variables pour la mise en place du countdown pour le temps avant les évènements
+     */
     private getCountdown() {
         /* const now = new Date();
          const date = moment(this.state.event.date,'DD/MM/YYYY')
@@ -87,9 +100,9 @@ class EventComponent extends Component {
 
 
     render() {
-
-
-
+        /**
+         * calcul de la distance entre nous et l'évènement
+         */
         const distance = geolib.getPreciseDistance(
             { latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude },
             { latitude: this.state.event.latitude, longitude: this.state.event.longitude }

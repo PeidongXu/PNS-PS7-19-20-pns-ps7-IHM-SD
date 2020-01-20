@@ -14,11 +14,15 @@ import images from "../../assets/sites/images";
 
 import { LinearGradient } from 'expo-linear-gradient';
 import CountdownList from '../countdown/countdownList'
-//import  CountDown from 'react-native-countdown-component';
 import Favorite from '../Favorite/Favorite'
 import style from '../Menu/style';
 import { Right } from 'native-base';
 
+
+/**
+ * Génération d'un Item de la list (event)
+ * @param event 
+ */
 function Item({ event }) {
     return (
         <View>
@@ -31,7 +35,6 @@ function Item({ event }) {
     );
 
 }
-
 
 class EventsList extends Component {
     static navigationOptions = props => {
@@ -97,7 +100,10 @@ class EventsList extends Component {
         this.setState({ location });
     };
 
-
+    /**
+     * Génération graphique et textuel d'un item de la List des évnènements
+     * @param item
+     */
     renderItem = ({ item }) => {
         return (
             <View>

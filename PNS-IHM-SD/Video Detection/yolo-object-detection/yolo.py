@@ -35,7 +35,6 @@ weightsPath = os.path.sep.join([args["yolo"], "yolov3.weights"])
 configPath = os.path.sep.join([args["yolo"], "yolov3.cfg"])
 
 # load our YOLO object detector trained on COCO dataset (80 classes)
-# print("[INFO] loading YOLO from disk...")
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
 # load our input image and grab its spatial dimensions
@@ -176,8 +175,8 @@ def sort_group(groups):
 			max = len(groups[i])
 
 	#print(nb_group)
-	print("the number of group is (%d)" %(nb_group))
-	print("the largest number of people is (%d)" %max)# the largest number of people in one group
+	#print("the number of group is (%d)" %(nb_group))
+	#print("the largest number of people is (%d)" %max)# the largest number of people in one group
 
 
 
@@ -227,7 +226,7 @@ if len(idxs) > 0:
 
 # show the output image
 
-print("the number of people is %d" %smith_a)
+#print("the number of people is %d" %smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
 #cv2.imshow("Image", image)

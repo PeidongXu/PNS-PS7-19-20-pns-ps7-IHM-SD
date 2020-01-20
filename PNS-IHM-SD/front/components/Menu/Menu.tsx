@@ -6,15 +6,17 @@ import MapEvent from "../Map/MapEvent"
 
 class Menu extends Component {
   /**
-   *  @param {String} name Icon name
-   *  @param {String} text place name
+   * 
+   * Génération d'un bouton dans le Menu
+   * Redirection vers la page MapEvent
+   * 
+   *  @param {String} name Nom Icon
+   *  @param {String} text information sur le bouton
    *  @param {Number} size Icon size
    *  @param {String} color Icon color
    *  @param {String} type Icon type
-   *  @param {String} time time name
+   *  @param {String} time Key request
    */
-
-
   getItem = (name, text, size, color, type, time) => (
     <TouchableOpacity
       onPress={() =>
@@ -37,28 +39,18 @@ class Menu extends Component {
       </View>
     </TouchableOpacity>
   );
-  getItemNow = (name, text, size, color, type, time) => (
-    <TouchableOpacity
-      onPress={() =>
-        this.props.navigation.navigate("MapEvent", {
-          placeName: text,
-          TimeData: time
-        })
-      }
-    >
-      <View style={styles.iconStyle}>
-        <Icon
-          name={name}
-          size={size}
-          reverse
-          color={color}
-          type={type}
-          raised
-        />
-        <Text style={styles.textStyle}>{text}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+
+  /**
+   * 
+   * Génération d'un bouton dans le Menu
+   * Redirection vers la page SliderDay (sélection des èvents du jour)
+   * 
+   *  @param {String} name Nom Icon
+   *  @param {String} text information sur le bouton
+   *  @param {Number} size Icon size
+   *  @param {String} color Icon color
+   *  @param {String} type Icon type
+   */
   getItemDay = (name, text, size, color, type) => (
     <TouchableOpacity
       onPress={() =>

@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import CountDown from 'react-native-countdown-component';
 import { View } from 'native-base';
 
+/**
+ * Compte a rebour pour le temps avant les évènements
+ * Page EventList
+ */
 class CountdownList extends Component {
     constructor(props) {
         super(props);

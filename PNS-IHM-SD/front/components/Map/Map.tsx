@@ -37,6 +37,7 @@ class MapScreen extends Component {
     }
 
   }
+
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -71,16 +72,6 @@ class MapScreen extends Component {
 
 
   render() {
-    let text = 'Waiting..';
-    let myLatitude = 43.615692;
-    let myLongitude = 7.071778;
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
-      myLatitude = this.state.location.coords.latitude;
-      myLongitude = this.state.location.coords.longitude;
-    }
     /* console.log("distance: "+geolib.getPreciseDistance(
        { latitude: 43.615560, longitude: 7.071767 },
        { latitude: 43.617323, longitude: 7.074716 }
