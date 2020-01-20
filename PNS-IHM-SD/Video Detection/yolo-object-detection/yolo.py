@@ -176,8 +176,8 @@ def sort_group(groups):
 			max = len(groups[i])
 
 	#print(nb_group)
-	print("the number of group is (%d)" %(nb_group))
-	print("the largest number of people is (%d)" %max)# the largest number of people in one group
+	#print("the number of group is (%d)" %(nb_group))
+	#print("the largest number of people is (%d)" %max)# the largest number of people in one group
 
 
 
@@ -227,7 +227,7 @@ if len(idxs) > 0:
 
 # show the output image
 
-print("the number of people is %d" %smith_a)
+#print("the number of people is %d" %smith_a)
 sys.stdout.write(str(smith_a))
 sys.stdout.flush()
 #cv2.imshow("Image", image)
