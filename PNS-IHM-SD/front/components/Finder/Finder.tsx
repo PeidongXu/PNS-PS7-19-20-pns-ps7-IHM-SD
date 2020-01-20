@@ -15,7 +15,7 @@ class Finder extends Component {
     return (
       <Container style={styles.container}>
         <Content>
-          <MenuItem navigation={navigation}/>
+          <MenuItem navigation={navigation} />
         </Content>
       </Container>
     );

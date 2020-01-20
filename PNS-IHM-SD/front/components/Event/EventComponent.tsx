@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Dimensions, Image, Animated } from 'react-native';
 import { Event } from '../../Models/Event';
 import Countdown from "../countdown/countdown"
-import About from "../About/About"
+import PeopleCounter from "../PeopleCounter/PeopleCounter"
 import moment from "moment"
 import * as geolib from "geolib";
 import images from "../../assets/sites/images";
@@ -116,7 +116,7 @@ class EventComponent extends Component {
                     <Text style={styles.description}>{this.state.event.description}</Text>
                 </View>
                 <View style={styles.center}>
-                    <About
+                    <PeopleCounter
                         event={this.state.event}
                     />
                 </View>

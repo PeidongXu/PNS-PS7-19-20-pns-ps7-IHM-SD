@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button } from "react-native-elements";
 import { serverUrl } from "../../serverConfig/server.config";
 
-class About extends Component {
+class PeopleCounter extends Component {
 
     constructor(props) {
         super(props);
@@ -58,7 +58,7 @@ class About extends Component {
         )
     }
 }
-export default About;
+export default PeopleCounter;
 
 const styles = StyleSheet.create({
 

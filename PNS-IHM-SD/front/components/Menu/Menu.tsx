@@ -17,13 +17,13 @@ class Menu extends Component {
 
   getItem = (name, text, size, color, type, time) => (
     <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate("MapEvent", {
-            placeName: text,
-            TimeData: time
-          })
-        }
-      >
+      onPress={() =>
+        this.props.navigation.navigate("MapEvent", {
+          placeName: text,
+          TimeData: time
+        })
+      }
+    >
       <View style={styles.iconStyle}>
         <Icon
           name={name}
@@ -39,13 +39,13 @@ class Menu extends Component {
   );
   getItemNow = (name, text, size, color, type, time) => (
     <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate("MapEvent", {
-            placeName: text,
-            TimeData: time
-          })
-        }
-      >
+      onPress={() =>
+        this.props.navigation.navigate("MapEvent", {
+          placeName: text,
+          TimeData: time
+        })
+      }
+    >
       <View style={styles.iconStyle}>
         <Icon
           name={name}
@@ -61,12 +61,12 @@ class Menu extends Component {
   );
   getItemDay = (name, text, size, color, type) => (
     <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate("SliderDay", {
-            placeName: text
-          })
-        }
-      >
+      onPress={() =>
+        this.props.navigation.navigate("SliderDay", {
+          placeName: text
+        })
+      }
+    >
       <View style={styles.iconStyle}>
         <Icon
           name={name}
@@ -87,8 +87,8 @@ class Menu extends Component {
       <View style={styles.container}>
         <View style={styles.iconContainer}>
           {this.getItem("flag-o", "Events Past", 40, "#66b3ff", "font-awesome", "before")}
-          {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorite" )}
-          {this.getItem("flag", "Not Started", 40, "#00ea75", "font-awesome","after" )}
+          {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorite")}
+          {this.getItem("flag", "Not Started", 40, "#00ea75", "font-awesome", "after")}
         </View>
       </View>
     );

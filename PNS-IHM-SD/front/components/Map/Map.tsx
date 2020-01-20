@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import * as geolib from 'geolib';
-import { Platform, View, Dimensions, Text} from 'react-native';
+import { Platform, View, Dimensions, Text } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
 import styles from "./Style";
 import axios from "axios";
-import {Event} from "../../Models/Event";
-import {serverUrl} from "../../serverConfig/server.config";
+import { Event } from "../../Models/Event";
+import { serverUrl } from "../../serverConfig/server.config";
 
 
 class MapScreen extends Component {
   static navigationOptions = props => {
     const TimeData = props.navigation.getParam("TimeData");
-   return { TimeData };
+    return { TimeData };
   };
   constructor(props) {
     super(props);
     this.state = {
       location: null,
       errorMessage: null,
-      events:[]
-  };
-}
+      events: []
+    };
+  }
 
   componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -48,11 +48,11 @@ class MapScreen extends Component {
     this.setState({ location });
   };
 
-  private URLGeneration () {
-    if(this.props.navigation.getParam("TimeData")) {
-      return serverUrl+'/api/events/' + this.props.navigation.getParam("TimeData");
-    }else{
-      return serverUrl+'/api/events'
+  private URLGeneration() {
+    if (this.props.navigation.getParam("TimeData")) {
+      return serverUrl + '/api/events/' + this.props.navigation.getParam("TimeData");
+    } else {
+      return serverUrl + '/api/events'
     }
 
   }
@@ -63,9 +63,9 @@ class MapScreen extends Component {
 
 
   private getEvents = async () => {
-   // console.log(this.URL)
+    // console.log(this.URL)
     axios.get<Event[]>(this.URL).then(res => {
-      this.setState({events: res.data});
+      this.setState({ events: res.data });
     });
   };
 
@@ -81,13 +81,13 @@ class MapScreen extends Component {
       myLatitude = this.state.location.coords.latitude;
       myLongitude = this.state.location.coords.longitude;
     }
-   /* console.log("distance: "+geolib.getPreciseDistance(
-      { latitude: 43.615560, longitude: 7.071767 },
-      { latitude: 43.617323, longitude: 7.074716 }
-  ))*/
+    /* console.log("distance: "+geolib.getPreciseDistance(
+       { latitude: 43.615560, longitude: 7.071767 },
+       { latitude: 43.617323, longitude: 7.074716 }
+   ))*/
     return (
       <View style={styles.container}>
-        <MapView  style={styles.mapStyle}
+        <MapView style={styles.mapStyle}
           showsUserLocation={true}
           zoomEnabled={true}
           zoomControlEnabled={false}
@@ -98,11 +98,11 @@ class MapScreen extends Component {
             longitudeDelta: 0.01,
           }}>
           {this.state.events.map(event => (
-              <Marker
-                  coordinate={{ latitude: event.latitude, longitude: event.longitude }}
-                  title={event.title}
-                  description={event.description}
-              />
+            <Marker
+              coordinate={{ latitude: event.latitude, longitude: event.longitude }}
+              title={event.title}
+              description={event.description}
+            />
           ))}
         </MapView>
       </View>

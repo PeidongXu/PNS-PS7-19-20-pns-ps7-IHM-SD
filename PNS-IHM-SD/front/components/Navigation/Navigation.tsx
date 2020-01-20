@@ -8,7 +8,6 @@ import Finder from "../../components/Finder/Finder";
 //import ProfileScreen from "../../components/Profile/Profile";
 import MapScreen from "../../components/Map/Map";
 import MapEvent from "../../components/Map/MapEvent"
-import About from "../About/About";
 import SliderDay from "../Filter/SliderDay"
 //Screen in the Home tab
 const DashboardContainer = createStackNavigator(
