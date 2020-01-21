@@ -78,15 +78,18 @@ class Menu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {this.getItem("flag-o", "Events Past", 40, "#66b3ff", "font-awesome", /*"before"*/ "today")}
-          {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorites")}
-          {this.getItem("flag", "Not Started", 40, "#00ea75", "font-awesome", "after")}
+          {this.getItem("flag-checkered", "Today Events", 70, "#3d91e3", "font-awesome","today")}
+          {this.getItem("favorite", "Favorites", 70, "#f66", "materialicons", "favorites")}
+          {this.getItem("flag-o", "Events Past", 70, "#F44336", "font-awesome", "before")}
+          {this.getItem("flag", "Not Started", 70, "#10a158", "font-awesome", "after")}
         </View>
       </View>
     );
   }
 }
-//{this.getItemNow("flag", "Right Now", 70, "#00ea75", "font-awesome","rightnow")}
+
+//{this.getItem("flag", "Right Now", 40, "#66b3ff", "font-awesome","rightnow")}
+
 //{this.getItemDay("calendar", "Choose Day", 70, "#ffa54d", "font-awesome")}
 //{this.getItem("md-fitness", "Sports", 60, "#66b3ff", "ionicon")}
 //{this.getItem("flag-checkered", "Now", 40, "#66b3ff", "font-awesome","today")}

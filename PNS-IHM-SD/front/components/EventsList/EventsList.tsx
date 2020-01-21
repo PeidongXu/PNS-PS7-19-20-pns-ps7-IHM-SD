@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { serverUrl } from '../../serverConfig/server.config';
-import { StyleSheet, Text, View, SafeAreaView, Modal, SectionList, FlatList, Platform, TouchableOpacity, Button, Image, TouchableHighlight, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Modal, ScrollView, Platform, TouchableOpacity, Button, Image, TouchableHighlight, TouchableNativeFeedback, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Constants from 'expo-constants';
@@ -143,7 +143,10 @@ class EventsList extends Component{
             </View>
         );
     };
-
+    /**
+     * Initalisation des variables pour la mise en place du countdown pour le temps avant les évènements
+     * DEBUT
+     */
     private getCountdown(event) {
         const date = new Date();
         const now = moment(date, "DD/MM/YYYY HH:mm")
@@ -151,7 +154,10 @@ class EventsList extends Component{
         const duration = then.diff(now) / 1000
         return duration
     }
-
+    /**
+     * Initalisation des variables pour la mise en place du countdown pour le temps avant les évènements
+     * FIN
+     */
     private isItFinished(event){
         const date = new Date();
         const now = moment(date, "DD/MM/YYYY HH:mm")
@@ -172,7 +178,7 @@ class EventsList extends Component{
 
      _renderSection = ({ section }) => (
         <LinearGradient
-            colors= {['#fff', '#efefef']}
+            colors= {['#fff', '#e4e4e4']}
             style={{ flex: 1 }}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: 0 }}
@@ -198,8 +204,7 @@ class EventsList extends Component{
                         this.closeModal();
                     }}
                 >
-                    <View>
-                        <View style={styles.innerContainer}>
+                    <View style={styles.innerContainer}>
                             <EventComponent
                                 event={this.state.event}
                                 location={this.state.location}
@@ -211,7 +216,6 @@ class EventsList extends Component{
                                 title="Close Event"
                             >
                             </Button>
-                        </View>
                     </View>
 
                 </Modal>
@@ -243,13 +247,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'white',
-    },
     innerContainer: {
+        height: Dimensions.get('window').height,
         alignItems: 'center',
+        //backgroundColor: '#2f2c3c', // sombre
+        backgroundColor: "#fff"
     },
     item: {
         backgroundColor: '#f9c2ff',

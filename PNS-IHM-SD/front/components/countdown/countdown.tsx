@@ -22,7 +22,7 @@ class Countdown extends Component {
             if(!this.state.inEvent) {
                 return this.state.finished? <Text style={{color:"#fff"}}>Already Finished</Text> : <Text style={{color:"#fff"}}>In Progress</Text>;
             }else {
-                return this.state.finished? <Text style={{color:"#000"}}>Already Finished</Text> : <Text style={{color:"#000"}}>In Progress</Text>;
+                return this.state.finished? <Text style={{color:"#000",  fontWeight: 'bold', fontSize: 18, marginTop: 5, marginBottom: 20}}>Already Finished</Text> : <Text style={{color:"#000",  fontWeight: 'bold', fontSize: 18, marginTop: 5, marginBottom: 20}}>In Progress</Text>;
             }
                 
         }else if(this.state.countdown > 0){
@@ -45,6 +45,7 @@ class Countdown extends Component {
                 until={this.state.countdown}
                 size={20}
                 timeToShow={timetoshow}
+                digitStyle={{ backgroundColor: '#29e386' }}
             /> ;
             }
 
