@@ -342,7 +342,7 @@ router.get('/testing/', (req, res) => {
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/yoga.jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
-    res.status(200).json(parseInt(data.toString(),10));
+    res.status(200).json(data.toString());
   });
 
   // Handle error output
@@ -364,7 +364,7 @@ router.get('/detection/:id', (req, res) => {
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+req.params.id+".jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
-    res.status(200).json(parseInt(data.toString(),10));
+    res.status(200).json(data.toString());
   });
 
   // Handle error output
