@@ -12,7 +12,7 @@ import * as Location from "expo-location";
 import images from "../../assets/sites/images";
 
 import { LinearGradient } from 'expo-linear-gradient';
-import CountdownList from '../countdown/countdownList'
+import Countdown from '../countdown/countdown'
 import moment from "moment";
 
 
@@ -47,7 +47,7 @@ class EventsList extends Component{
         errorMessage: null,
         myLatitude: 43.615692,
         myLongitude: 7.071778,
-
+        duration: null,
     };
 
     constructor(props) {
@@ -127,9 +127,10 @@ class EventsList extends Component{
                                 <Text style={styles.secondaryText}></Text>
                             </View>
                             <View style={styles.countdownAlign}>
-                                <CountdownList
+                                <Countdown
                                 countdown={this.getCountdown(item)}
-                                finished = {this.isItFinished(item)}/>
+                                finished = {this.isItFinished(item)}
+                                inEvent = {false}/>
                             </View>
                             <View style={styles.chevronContainer}>
                                 <Icon name="chevron-right" style={styles.Icon} />
@@ -204,7 +205,6 @@ class EventsList extends Component{
                                 location={this.state.location}
                                 myLatitude ={this.state.myLatitude}
                                 myLongitude ={this.state.myLongitude}
-
                             />
                             <Button
                                 onPress={() => this.closeModal()}
