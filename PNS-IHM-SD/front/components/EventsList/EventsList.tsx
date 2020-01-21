@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, SafeAreaView, Modal, SectionList, FlatList, Pla
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Constants from 'expo-constants';
-import { EventsService } from '../../Services/events';
 import { Event } from '../../Models/Event';
 import axios from "axios";
 import EventComponent from "../Event/EventComponent";
@@ -14,9 +13,6 @@ import images from "../../assets/sites/images";
 
 import { LinearGradient } from 'expo-linear-gradient';
 import CountdownList from '../countdown/countdownList'
-import Favorite from '../Favorite/Favorite'
-import style from '../Menu/style';
-import { Right } from 'native-base';
 import moment from "moment";
 
 
