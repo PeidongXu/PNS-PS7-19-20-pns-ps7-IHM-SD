@@ -51,9 +51,29 @@ function checkDate(){
   return filtredEvents;
 }
 
+function TodayEvents(){
+  /*let filtredEvents= [];
+  filtredEvents = filtredEvents.concat(checkRightNow());
+  filtredEvents = filtredEvents.concat(checkTodayNotStarted());
+  filtredEvents = filtredEvents.concat(checkTodayFinish());
+
+  return filtredEvents;*/
+
+  let data=[];
+  let RightNow ={"title": "Events in progress" , "data":checkRightNow() };
+  data=data.concat(RightNow)
+  let NotStarted =  {"title": "Events not started" , "data":checkTodayNotStarted() };
+  data=data.concat(NotStarted)
+  let Finished =  {"title": "Events finished" , "data":checkTodayFinish() };
+  data=data.concat(Finished)
+
+  return data;
+
+}
+
 router.get('/today', (req, res) => {
   try {
-    res.status(200).json(checkDate());
+    res.status(200).json(TodayEvents());
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
@@ -162,7 +182,11 @@ function checkAfterDate(){
     (a, b) =>
       new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
   );
-  return filtredEvents;
+
+  let data =[]
+  data = data.concat({"title": "Events not started", "data": filtredEvents})
+
+  return data
 }
 
 router.get('/after', (req, res) => {
@@ -198,8 +222,10 @@ function checkBeforeDate(){
     (a, b) =>
       new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
   );
+  let data = []
+  data =data.concat( {"title": "Events already finished", "data": filtredEvents})
 
-  return filtredEvents;
+  return data
 }
 
 router.get('/before', (req, res) => {

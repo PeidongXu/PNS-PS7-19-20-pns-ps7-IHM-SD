@@ -50,7 +50,8 @@ class EventsList extends Component{
         location: null,
         errorMessage: null,
         myLatitude: 43.615692,
-        myLongitude: 7.071778
+        myLongitude: 7.071778,
+
     };
 
     constructor(props) {
@@ -210,7 +211,9 @@ class EventsList extends Component{
 
                 </Modal>
                 <SwipeListView
-                    data={this.state.events}
+                    useSectionList
+                    sections={this.state.events}
+                    //data={this.state.events}
                     renderItem={this.renderItem}
                     /*renderHiddenItem={ (rowData, rowMap) => (
                         <View style={styles.rowBack}>
@@ -219,6 +222,9 @@ class EventsList extends Component{
                             </TouchableOpacity>
                         </View>
                     )}*/
+                    renderSectionHeader={({ section }) => (
+                        <Text>{section.title}</Text>
+                    )}
                     rightOpenValue={-75}
                     closeOnScroll={true}
                 />
