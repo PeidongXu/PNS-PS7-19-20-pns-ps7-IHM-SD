@@ -114,19 +114,21 @@ def calculate_distance(x1,y1,x2,y2):
 #find group member
 
 group_set=[]
+def find_groups():
+	#find the group 
+	for i in idxs.flatten():
+		if LABELS[classIDs[i]]=="person":
+			group_list.setdefault(i,[]).append(i)
+			for j in range(i+1,len(boxes)):
+				if LABELS[classIDs[j]]=="person":
+					dis = calculate_distance(boxes[i][0], boxes[i][1],boxes[j][0], boxes[j][1])
+					if dis <= boxes[i][2]+20 or dis <=boxes[j][2]+20 :
+						group_list[i].append(j)
+						distance_list.append(dis)
+	return group_list
 
-#find the group 
-for i in idxs.flatten():
-	if LABELS[classIDs[i]]=="person":
-		group_list.setdefault(i,[]).append(i)
-		for j in range(i+1,len(boxes)):
-			if LABELS[classIDs[j]]=="person":
-				dis = calculate_distance(boxes[i][0], boxes[i][1],boxes[j][0], boxes[j][1])
-				if dis <= boxes[i][2]+20 or dis <=boxes[j][2]+20 :
-					group_list[i].append(j)
-					distance_list.append(dis)
 
-
+groups_list = find_groups()
 # draw a bounding box rectangle on all of the groups 
 #print(group_list)
 for i in group_list:
@@ -168,8 +170,9 @@ def sort_group(groups):
 	#print ([i for i in groups if i is not [0]])
 
 	nb_group = l
+	max = 0
 	for i in range(l):
-		max = 0
+		
 		if len(groups[i]) == 1:
 			nb_group= nb_group - 1
 		if len(groups[i])>max:
