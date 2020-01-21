@@ -19,7 +19,7 @@ class CountdownList extends Component {
 
     renderCountdown(){
         if(this.state.countdown < 0){
-            return this.state.finished? <Text>Already Finished</Text> : <Text>In Progress</Text>;
+            return this.state.finished? <Text style={{color:"#fff"}}>Already Finished</Text> : <Text style={{color:"#fff"}}>In Progress</Text>;
         }else if(this.state.countdown > 0){
             let timetoshow = ['D', 'H', 'M']
             if(this.state.countdown < 86400){

@@ -93,28 +93,26 @@ class EventsList extends Component{
         }
         let location = await Location.getCurrentPositionAsync({});
         this.setState({ location });
+        this.setState({myLatitude : location.coords.latitude})
+        this.setState({myLongitude : location.coords.longitude})
     };
 
     /**
      * Génération graphique et textuel d'un item de la List des évnènements
      * @param item
      */
-    renderItem = ({ item }) => {
-        let color=['#FF9800', '#F44336'];
+    renderItem = ({ item }) => { 
+        let color=['#FF9800', '#F44336']; //rouge
         if(!this.isItFinished(item) && this.getCountdown(item)<0){
-            color=['#66b3ff', '#3d91e3']
+            color=['#66b3ff', '#3d91e3'] //bleu
         }else if(this.getCountdown(item)>0){
-            color=['#29e386' , '#10a158']
+            color=['#29e386' , '#10a158'] //vert
         }
-
         return (
             <View>
                 <TouchableHighlight onPress={() => this.openModal(item)}>
                     <LinearGradient
-                        //colors={['#29e386' , '#10a158']} //vert
-                        //colors={['#66b3ff', '#3d91e3']} //bleu
-                        //colors={['#FF9800', '#F44336']} //rouge
-                        colors={color} //rouge
+                        colors={color} 
                         style={{ flex: 1 }}
                         start={{ x: 0, y: 1 }}
                         end={{ x: 1, y: 0 }}
@@ -140,30 +138,24 @@ class EventsList extends Component{
 
                     </LinearGradient>
                 </TouchableHighlight >
-                <View
-                    style={{
-                        height: 1,
-                        width: "100%",
-                        backgroundColor: "#CED0CE",
-                    }}
-                />
+                <View style={{ height: 1, width: "100%", backgroundColor: "#CED0CE",}}/>
             </View>
         );
     };
 
     private getCountdown(event) {
         const date = new Date();
-        const now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
-        const then = event.date + " " + event.startHour;
-        const duration = moment(then, "DD/MM/YYYY HH:mm").diff(moment(now, "DD/MM/YYYY HH:mm")) / 1000
+        const now = moment(date, "DD/MM/YYYY HH:mm")
+        const then = moment(event.date + " " + event.startHour, "DD/MM/YYYY HH:mm");
+        const duration = then.diff(now) / 1000
         return duration
     }
 
     private isItFinished(event){
         const date = new Date();
-        const now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
-        const then = event.date + " " + event.endHour;
-        const duration = moment(then, "DD/MM/YYYY HH:mm").diff(moment(now, "DD/MM/YYYY HH:mm")) / 1000
+        const now = moment(date, "DD/MM/YYYY HH:mm")
+        const then = moment(event.date + " " + event.endHour, "DD/MM/YYYY HH:mm");
+        const duration = then.diff(now)  / 1000
         return duration < 0
     }
 
@@ -176,6 +168,20 @@ class EventsList extends Component{
         this.setState({ modalVisible: false });
     }
 
+
+     _renderSection = ({ section }) => (
+        <LinearGradient
+            colors= {['#fff', '#efefef']}
+            style={{ flex: 1 }}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 0 }}
+        >
+            <View style={{ padding: 8}}>
+                <Text style={{ color: '#000', fontWeight: "bold" }}>{section.title.toUpperCase()}</Text>
+            </View>
+            <View style={{ height: 1, width: "100%", backgroundColor: "#CED0CE",}}/>
+        </LinearGradient>
+      )
 
     render() {
         /* const myLatitude = this.state.location.coords.latitude;
@@ -191,15 +197,18 @@ class EventsList extends Component{
                         this.closeModal();
                     }}
                 >
-                    <View style={styles.modalContainer}>
+                    <View>
                         <View style={styles.innerContainer}>
                             <EventComponent
                                 event={this.state.event}
                                 location={this.state.location}
+                                myLatitude ={this.state.myLatitude}
+                                myLongitude ={this.state.myLongitude}
+
                             />
                             <Button
                                 onPress={() => this.closeModal()}
-                                title="Close modal"
+                                title="Close Event"
                             >
                             </Button>
                         </View>
@@ -211,16 +220,14 @@ class EventsList extends Component{
                     sections={this.state.events}
                     //data={this.state.events}
                     renderItem={this.renderItem}
-                    /*renderHiddenItem={ (rowData, rowMap) => (
+                    renderHiddenItem={ (rowData, rowMap) => (
                         <View style={styles.rowBack}>
                             <TouchableOpacity onPress={ () => rowMap[rowData.item.key].closeRow() }>
                                 <Text>Close</Text>
                             </TouchableOpacity>
                         </View>
-                    )}*/
-                    renderSectionHeader={({ section }) => (
-                        <Text>{section.title}</Text>
                     )}
+                    renderSectionHeader={this._renderSection}
                     rightOpenValue={-75}
                     closeOnScroll={true}
                 />
