@@ -24,7 +24,7 @@ class PeopleCounter extends Component {
             .then((responseJson) => {
                 //Success
                 //  console.log(responseJson);
-                alert("Il y a " + JSON.stringify(responseJson) + " personne(s) à cet event");
+                alert("Il y a " +  JSON.stringify(responseJson).split(',')[0].split("\"")[1] + " personne(s) à cet event");
             })
             //If response is not in json then in error
             .catch((error) => {

@@ -60,6 +60,11 @@ end = time.time()
 # print("[INFO] YOLO took {:.6f} seconds".format(end - start))
 
 
+#Some global variables : number of groups, number of persons in the largest group
+n_groups = 0  #number of group
+n_persons = 0 #number of person in the largest group
+
+
 # initialize our lists of detected bounding boxes, confidences, and
 # class IDs, respectively
 boxes = []
@@ -114,7 +119,7 @@ def calculate_distance(x1,y1,x2,y2):
 
 group_set=[]
 
-#find the group 
+#find the group
 for i in idxs.flatten():
 	if LABELS[classIDs[i]]=="person":
 		group_list.setdefault(i,[]).append(i)
@@ -126,7 +131,7 @@ for i in idxs.flatten():
 					distance_list.append(dis)
 
 
-# draw a bounding box rectangle on all of the groups 
+# draw a bounding box rectangle on all of the groups
 #print(group_list)
 for i in group_list:
 	if len(group_list[i])>1 and  LABELS[classIDs[i]]=="person" :
@@ -152,6 +157,8 @@ for i in group_list:
 
 #split the group  modify by peidong 17/01/2020 17:13
 def sort_group(groups):
+	global n_groups
+	global n_persons
 	#group_set =  [ [1,2,3],[4,5,6],[3,4],[7,8],[8,9],[6,12,13] ]
 	l = len(groups)
 	for i in range(l):
@@ -167,6 +174,7 @@ def sort_group(groups):
 	#print ([i for i in groups if i is not [0]])
 
 	nb_group = l
+	max = 0
 	for i in range(l):
 		max = 0
 		if len(groups[i]) == 1:
@@ -175,8 +183,11 @@ def sort_group(groups):
 			max = len(groups[i])
 
 	#print(nb_group)
+	n_groups = nb_group
 	#print("the number of group is (%d)" %(nb_group))
+
 	#print("the largest number of people is (%d)" %max)# the largest number of people in one group
+	n_persons = max
 
 
 
@@ -204,8 +215,6 @@ if len(idxs) > 0:
 
 
 
-
-
 #Give Number of persons
 smith_a=0
 if len(idxs) > 0:
@@ -227,9 +236,9 @@ if len(idxs) > 0:
 # show the output image
 
 #print("the number of people is %d" %smith_a)
-sys.stdout.write(str(smith_a))
+sys.stdout.write(str(smith_a)+","+str(n_groups)+","+str(n_persons))
 sys.stdout.flush()
 #cv2.imshow("Image", image)
-cv2.imwrite("testyolo.jpg",image)
-cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
+#cv2.imwrite("testyoloo.jpg",image)
+#cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
 cv2.waitKey(0)

@@ -54,7 +54,7 @@ class MapScreen extends Component {
     if (this.props.navigation.getParam("TimeData")) {
       return serverUrl + '/api/events/' + this.props.navigation.getParam("TimeData");
     } else {
-      return serverUrl + '/api/events'
+      return serverUrl + '/api/events/today'
     }
 
   }

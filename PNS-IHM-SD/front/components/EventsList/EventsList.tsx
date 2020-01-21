@@ -70,7 +70,7 @@ class EventsList extends Component{
         if (this.props.navigation.getParam("TimeData")) {
             return serverUrl + '/api/events/' + this.props.navigation.getParam("TimeData");
         } else {
-            return serverUrl + '/api/events'
+            return serverUrl + '/api/events/today'
         }
 
     }
@@ -101,7 +101,7 @@ class EventsList extends Component{
      * Génération graphique et textuel d'un item de la List des évnènements
      * @param item
      */
-    renderItem = ({ item }) => { 
+    renderItem = ({ item }) => {
         let color=['#FF9800', '#F44336']; //rouge
         if(!this.isItFinished(item) && this.getCountdown(item)<0){
             color=['#66b3ff', '#3d91e3'] //bleu
@@ -112,7 +112,7 @@ class EventsList extends Component{
             <View>
                 <TouchableHighlight onPress={() => this.openModal(item)}>
                     <LinearGradient
-                        colors={color} 
+                        colors={color}
                         style={{ flex: 1 }}
                         start={{ x: 0, y: 1 }}
                         end={{ x: 1, y: 0 }}

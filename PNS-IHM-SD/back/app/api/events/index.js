@@ -15,11 +15,19 @@ function addCoordinate(){
 
   return events;
 }
+
+function getAllEvents(){
+  let events =[];
+  events = events.concat({"title": "All Events", "data": addCoordinate()})
+
+  return events;
+
+}
 //router.get('/', (req, res) => res.status(200).json(Event.get()));
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(addCoordinate());
+    res.status(200).json(getAllEvents());
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
@@ -342,7 +350,7 @@ router.get('/testing/', (req, res) => {
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/yoga.jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
-    res.status(200).json(parseInt(data.toString(),10));
+    res.status(200).json(data.toString());
   });
 
   // Handle error output
@@ -364,7 +372,7 @@ router.get('/detection/:id', (req, res) => {
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+req.params.id+".jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
-    res.status(200).json(parseInt(data.toString(),10));
+    res.status(200).json(data.toString());
   });
 
   // Handle error output
