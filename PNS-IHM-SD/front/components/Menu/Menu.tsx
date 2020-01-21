@@ -79,7 +79,7 @@ class Menu extends Component {
       <View style={styles.container}>
         <View style={styles.iconContainer}>
           {this.getItem("flag-o", "Events Past", 40, "#66b3ff", "font-awesome", /*"before"*/ "today")}
-          {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorite")}
+          {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorites")}
           {this.getItem("flag", "Not Started", 40, "#00ea75", "font-awesome", "after")}
         </View>
       </View>

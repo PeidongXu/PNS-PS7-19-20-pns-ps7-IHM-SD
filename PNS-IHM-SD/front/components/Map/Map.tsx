@@ -10,6 +10,7 @@ import styles from "./Style";
 import axios from "axios";
 import { Event } from "../../Models/Event";
 import { serverUrl } from "../../serverConfig/server.config";
+import {log} from "react-native-reanimated";
 
 
 class MapScreen extends Component {
@@ -64,10 +65,10 @@ class MapScreen extends Component {
 
 
   private getEvents = async () => {
-    // console.log(this.URL)
     axios.get<Event[]>(this.URL).then(res => {
       this.setState({ events: res.data });
     });
+
   };
 
 
@@ -88,12 +89,15 @@ class MapScreen extends Component {
             latitudeDelta: 0.03,
             longitudeDelta: 0.01,
           }}>
+
           {this.state.events.map(event => (
-            <Marker
-              coordinate={{ latitude: event.latitude, longitude: event.longitude }}
-              title={event.title}
-              description={event.description}
-            />
+              event.data.map(e =>(
+                  <Marker
+                      coordinate={{ latitude: e.latitude, longitude: e.longitude }}
+                      title={e.title}
+                      description={e.description}
+                  />
+              ))
           ))}
         </MapView>
       </View>
