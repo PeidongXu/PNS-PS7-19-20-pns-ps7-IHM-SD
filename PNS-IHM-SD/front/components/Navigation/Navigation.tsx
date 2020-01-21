@@ -45,7 +45,7 @@ const bottomTab = createBottomTabNavigator(
       }
     },
     Map: {
-      screen: MapScreen,
+      screen: MapEvent,
       navigationOptions: ({ navigation }) => ({
         title: "Map",
         tabBarIcon: ({ focused }) => (
@@ -73,7 +73,7 @@ const bottomTab = createBottomTabNavigator(
 );
 
 /**
- * Get Nom de Tab pour le Titre de la page 
+ * Get Nom de Tab pour le Titre de la page
  */
 bottomTab.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];

@@ -15,11 +15,19 @@ function addCoordinate(){
 
   return events;
 }
+
+function getAllEvents(){
+  let events =[];
+  events = events.concat({"title": "All Events", "data": addCoordinate()})
+
+  return events;
+
+}
 //router.get('/', (req, res) => res.status(200).json(Event.get()));
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(addCoordinate());
+    res.status(200).json(getAllEvents());
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
