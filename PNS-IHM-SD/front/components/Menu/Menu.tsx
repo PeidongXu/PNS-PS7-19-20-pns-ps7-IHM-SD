@@ -6,10 +6,10 @@ import MapEvent from "../Map/MapEvent"
 
 class Menu extends Component {
   /**
-   * 
+   *
    * Génération d'un bouton dans le Menu
    * Redirection vers la page MapEvent
-   * 
+   *
    *  @param {String} name Nom Icon
    *  @param {String} text information sur le bouton
    *  @param {Number} size Icon size
@@ -41,10 +41,10 @@ class Menu extends Component {
   );
 
   /**
-   * 
+   *
    * Génération d'un bouton dans le Menu
    * Redirection vers la page SliderDay (sélection des èvents du jour)
-   * 
+   *
    *  @param {String} name Nom Icon
    *  @param {String} text information sur le bouton
    *  @param {Number} size Icon size
@@ -78,7 +78,7 @@ class Menu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {this.getItem("flag-o", "Events Past", 40, "#66b3ff", "font-awesome", "before")}
+          {this.getItem("flag-o", "Events Past", 40, "#66b3ff", "font-awesome", /*"before"*/ "today")}
           {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorite")}
           {this.getItem("flag", "Not Started", 40, "#00ea75", "font-awesome", "after")}
         </View>

@@ -17,11 +17,12 @@ import CountdownList from '../countdown/countdownList'
 import Favorite from '../Favorite/Favorite'
 import style from '../Menu/style';
 import { Right } from 'native-base';
+import moment from "moment";
 
 
 /**
  * Génération d'un Item de la list (event)
- * @param event 
+ * @param event
  */
 function Item({ event }) {
     return (
@@ -36,7 +37,7 @@ function Item({ event }) {
 
 }
 
-class EventsList extends Component {
+class EventsList extends Component{
     static navigationOptions = props => {
         const TimeData = props.navigation.getParam("TimeData");
         return { TimeData };
@@ -78,9 +79,6 @@ class EventsList extends Component {
     }
 
     private URL = this.URLGeneration();
-    //private URL = 'http://192.168.1.78:9428/api/events';
-    //private URL = 'http://localhost:9428/api/events';
-
 
     private getEvents = async () => {
         axios.get<Event[]>(this.URL).then(res => {
@@ -105,13 +103,21 @@ class EventsList extends Component {
      * @param item
      */
     renderItem = ({ item }) => {
+        let color=['#FF9800', '#F44336'];
+        if(!this.isItFinished(item) && this.getCountdown(item)<0){
+            color=['#66b3ff', '#3d91e3']
+        }else if(this.getCountdown(item)>0){
+            color=['#29e386' , '#10a158']
+        }
+
         return (
             <View>
                 <TouchableHighlight onPress={() => this.openModal(item)}>
                     <LinearGradient
                         //colors={['#29e386' , '#10a158']} //vert
                         //colors={['#66b3ff', '#3d91e3']} //bleu
-                        colors={['#FF9800', '#F44336']} //rouge
+                        //colors={['#FF9800', '#F44336']} //rouge
+                        colors={color} //rouge
                         style={{ flex: 1 }}
                         start={{ x: 0, y: 1 }}
                         end={{ x: 1, y: 0 }}
@@ -126,14 +132,14 @@ class EventsList extends Component {
                                 <Text style={styles.secondaryText}></Text>
                             </View>
                             <View style={styles.countdownAlign}>
-                                <CountdownList />
+                                <CountdownList
+                                countdown={this.getCountdown(item)}
+                                finished = {this.isItFinished(item)}/>
                             </View>
                             <View style={styles.chevronContainer}>
                                 <Icon name="chevron-right" style={styles.Icon} />
                             </View>
                         </View>
-
-
 
                     </LinearGradient>
                 </TouchableHighlight >
@@ -147,6 +153,22 @@ class EventsList extends Component {
             </View>
         );
     };
+
+    private getCountdown(event) {
+        const date = new Date();
+        const now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+        const then = event.date + " " + event.startHour;
+        const duration = moment(then, "DD/MM/YYYY HH:mm").diff(moment(now, "DD/MM/YYYY HH:mm")) / 1000
+        return duration
+    }
+
+    private isItFinished(event){
+        const date = new Date();
+        const now = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+        const then = event.date + " " + event.endHour;
+        const duration = moment(then, "DD/MM/YYYY HH:mm").diff(moment(now, "DD/MM/YYYY HH:mm")) / 1000
+        return duration < 0
+    }
 
     openModal(event: Event) {
         this.setState({ modalVisible: true });

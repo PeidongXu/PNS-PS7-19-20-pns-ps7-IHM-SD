@@ -9,12 +9,12 @@
     "description": "Match de Football équipe d'Allemagne contre l'équipe d'Espagne.",
     "image": "foot",
     "imagepython": "soccer",
-    "test": ["polytech1","polytech2","polytech3","polytech4", "polytech5", "polytech6","polytech7", "polytech8","polytech9", "polytech10"],
+    "test": ["polytech","yoga","soccer"],
     "id": 1
   },
   {
     "siteID": 2,
-    "date": "14/01/2020",
+    "date": "22/01/2020",
     "startHour": "18:00",
     "endHour": "20:00",
     "sport": "Athlétisme",
@@ -22,7 +22,7 @@
     "description": "100 mètres haies",
     "image": "athle",
     "imagepython": "yoga",
-    "test": ["polytech1","polytech2","polytech3","polytech4", "polytech5", "polytech6","polytech7", "polytech8","polytech9", "polytech10"],
+    "test": ["polytech","yoga","soccer"],
     "id": 2
   },
   {
@@ -53,9 +53,9 @@
   },
   {
     "siteID": 5,
-    "date": "13/01/2020",
-    "startHour": "18:00",
-    "endHour": "20:00",
+    "date": "21/01/2020",
+    "startHour": "20:00",
+    "endHour": "22:00",
     "sport": "Basketball",
     "title": "France - Italie",
     "description": "Match de Basketball équipe de France contre l'équipe d'Italie.",
@@ -66,7 +66,7 @@
   },
   {
     "siteID": 6,
-    "date": "16/01/2020",
+    "date": "22/01/2020",
     "startHour": "12:00",
     "endHour": "15:00",
     "sport": "Golf",
@@ -79,8 +79,8 @@
   },
   {
     "siteID": 1,
-    "date": "17/01/2020",
-    "startHour": "17:00",
+    "date": "21/01/2020",
+    "startHour": "08:00",
     "endHour": "21:00",
     "sport": "Golf",
     "title": "18 trous",
@@ -92,9 +92,9 @@
   },
   {
     "siteID": 2,
-    "date": "17/01/2020",
+    "date": "21/01/2020",
     "startHour": "08:00",
-    "endHour": "16:00",
+    "endHour": "09:00",
       "sport": "Football",
     "title": "France - Italie",
     "description": "Finale de CDM.",
