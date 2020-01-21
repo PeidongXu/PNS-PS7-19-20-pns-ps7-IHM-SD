@@ -51,7 +51,13 @@ class EventComponent extends Component {
                 //Success
                 //  console.log(responseJson);
                 // alert("Il y a "+ JSON.stringify(responseJson) + " personne(s) à cet event");
-                this.setState({ count: JSON.stringify(responseJson) })
+                this.setState({ count: JSON.stringify(responseJson).split(',')[0].split("\"")[1] })
+
+                /*If a group has more than 5 people then --> ALERT*/
+                if(parseInt(JSON.stringify(responseJson).split(',')[2],10) > 5) {
+                    alert("There is a group with more than 5 people");
+                }
+
             })
             //If response is not in json then in error
             .catch((error) => {
