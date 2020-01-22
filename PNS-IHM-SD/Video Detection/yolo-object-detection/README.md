@@ -1,4 +1,4 @@
-#REQUIREMENTS
+## REQUIREMENTS
 
 -installation de OpenCV:
 $ pip install opencv-contrib-python
@@ -6,7 +6,7 @@ $ pip install opencv-contrib-python
 A base des 3 archives (.rar) de PNS-IHM-SD/Video Detection/yolo-object-detection/yolo-coco
 
 
-#EXECUTION
+## EXECUTION
 
 -Se positionner dans repertoire : PNS-IHM-SD/Video Detection/yolo-object-detection
 -Lancer la commande suivante pour traitement avec image :
@@ -19,7 +19,7 @@ $ python yolo_video.py --input videos/vid.mp4 --output output/vid_output.avi --y
 
 (apres --video il faut un chemin vers une video)
 
-#OUTPUT
+## OUTPUT
 
 -format de output : "X,Y,Z"
 x: Le nombre de personne sur l'image
@@ -30,7 +30,7 @@ z: Le nombre de personnes dans le plus grand groupe
 Une image est produite ou on met en evidence les personnes détectées
 
 
-#TEST PEOPLE COUNT
+## TEST PEOPLE COUNT
 Un test automatisé qui lance le script sur n images et retourne le pourcentage
 de réussite de la détection des personnes
 
