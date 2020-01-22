@@ -16,13 +16,14 @@ import SliderDay from "../Filter/SliderDay"
  */
 const DashboardContainer = createStackNavigator(
   {
-    Home: Finder,
+    Today: MapEvent,
     MapView: MapScreen,
     MapEvent: MapEvent,
-    SliderDay: SliderDay
+    SliderDay: SliderDay,
+    Finder: Finder
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Today"
   }
 );
 
@@ -31,28 +32,28 @@ const DashboardContainer = createStackNavigator(
  */
 const bottomTab = createBottomTabNavigator(
   {
-    Home: {
+    Today: {
       screen: DashboardContainer,
       navigationOptions: {
-        tabBarLabel: "Find",
-        tabBarIcon: ({ focused }) => (
-          <Icon
-            name="filter"
-            size={30}
-            color={`${focused ? "#e90000" : "#575757"}`}
-          />
-        ),
-      }
-    },
-    Map: {
-      screen: MapEvent,
-      navigationOptions: ({ navigation }) => ({
-        title: "Map",
+        tabBarLabel: "Today Event",
         tabBarIcon: ({ focused }) => (
           <Icon
             name="map-marker"
             size={30}
-            color={`${focused ? "#e90000" : "#575757"}`}
+            color={`${focused ? "#3d91e3" : "#575757"}`}
+          />
+        ),
+      }
+    },
+    Finder: {
+      screen: Finder,
+      navigationOptions: ({ navigation }) => ({
+        title: "Find",
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="filter"
+            size={30}
+            color={`${focused ? "#3d91e3" : "#575757"}`}
           />
         )
       })

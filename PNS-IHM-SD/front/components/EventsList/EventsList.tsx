@@ -14,6 +14,7 @@ import images from "../../assets/sites/images";
 import { LinearGradient } from 'expo-linear-gradient';
 import Countdown from '../countdown/countdown'
 import moment from "moment";
+import Favorites from '../Favorite/Favorite';
 
 
 /**
@@ -132,7 +133,9 @@ class EventsList extends Component{
                                 finished = {this.isItFinished(item)}
                                 inEvent = {false}/>
                             </View>
+                            <View><Favorites/></View>
                             <View style={styles.chevronContainer}>
+                                
                                 <Icon name="chevron-right" style={styles.Icon} />
                             </View>
                         </View>
@@ -229,6 +232,7 @@ class EventsList extends Component{
                             <TouchableOpacity onPress={ () => rowMap[rowData.item.key].closeRow() }>
                                 <Text>Close</Text>
                             </TouchableOpacity>
+                            <Favorites/>
                         </View>
                     )}
                     renderSectionHeader={this._renderSection}
@@ -246,6 +250,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: "#fff"
     },
     innerContainer: {
         height: Dimensions.get('window').height,

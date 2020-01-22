@@ -1,33 +1,41 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 
-class Favorite extends Component {
-  FullStar = key => (
-    <Icon color="#FFC300" key={key} type="ionicon" name="ios-star" size={12} />
-  );
+class Favorites extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggle: true
+    };
+  }
 
-  EmptyStar = key => (
-    <Icon
-      color="#FFC300"
-      key={key}
-      type="ionicon"
-      name="ios-star-outline"
-      size={12}
-    />
-  );
+  ToggleFunction = () => {
+    this.setState(state => ({
+      toggle: !state.toggle
+    }));
+  };
+
   render() {
-    const { stars } = this.props;
-    let starReviews = [];
-    for (let i = 1; i <= 5; i++) {
-      let star = this.FullStar(i);
-      if (i > stars) {
-        star = this.EmptyStar(i);
-      }
-      starReviews.push(star);
-    }
-    return <View style={{ flex: 1, flexDirection: "row" }}>{starReviews}</View>;
+    return (
+      <View>
+        <TouchableOpacity onPress={() => this.ToggleFunction()}>
+            {this.state.toggle ?
+            <Icon
+                name='heart-o'
+                type='font-awesome'
+                color='#fff'
+              />
+              :
+              <Icon
+              name='heart'
+              type='font-awesome'
+              color='#f66'
+            />
+                }
+        </TouchableOpacity>
+      </View>
+    );
   }
 }
-
-export default Favorite;
+export default Favorites;

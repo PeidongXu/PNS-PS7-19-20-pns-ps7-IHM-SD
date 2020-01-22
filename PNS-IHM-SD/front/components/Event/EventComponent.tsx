@@ -5,6 +5,7 @@ import moment from "moment"
 import * as geolib from "geolib";
 import images from "../../assets/sites/images";
 import { serverUrl } from "../../serverConfig/server.config";
+import Favorites from '../Favorite/Favorite';
 
 class EventComponent extends Component {
     constructor(props) {
@@ -141,6 +142,8 @@ class EventComponent extends Component {
                         inEvent = {true}
                     />
                 </View>
+                <View style={styles.boxWithShadow}><Favorites/></View>
+                
             </View>
 
         );
@@ -181,6 +184,7 @@ const styles = StyleSheet.create({
         //color: "#fff"
     },
     boxWithShadow: {
+        //backgroundColor: "#fff",
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 20,
