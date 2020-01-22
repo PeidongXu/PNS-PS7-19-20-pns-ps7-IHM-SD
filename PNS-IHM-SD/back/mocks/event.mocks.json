@@ -15,8 +15,8 @@
   {
     "siteID": 2,
     "date": "22/01/2020",
-    "startHour": "18:00",
-    "endHour": "20:00",
+    "startHour": "08:00",
+    "endHour": "10:00",
     "sport": "Athlétisme",
     "title": "100 mètres haies",
     "description": "100 mètres haies",
@@ -40,7 +40,7 @@
   },
   {
     "siteID": 4,
-    "date": "21/01/2020",
+    "date": "23/01/2020",
     "startHour": "18:00",
     "endHour": "20:00",
     "sport": "Tennis",
@@ -53,7 +53,7 @@
   },
   {
     "siteID": 5,
-    "date": "21/01/2020",
+    "date": "24/01/2020",
     "startHour": "20:00",
     "endHour": "22:00",
     "sport": "Basketball",
@@ -67,8 +67,8 @@
   {
     "siteID": 6,
     "date": "22/01/2020",
-    "startHour": "12:00",
-    "endHour": "15:00",
+    "startHour": "17:10",
+    "endHour": "18:00",
     "sport": "Golf",
     "title": "18 trous",
     "description": "18 trous au golde de Polympic.",
@@ -79,8 +79,8 @@
   },
   {
     "siteID": 1,
-    "date": "21/01/2020",
-    "startHour": "08:00",
+    "date": "22/01/2020",
+    "startHour": "20:00",
     "endHour": "21:00",
     "sport": "Golf",
     "title": "18 trous",
@@ -92,9 +92,9 @@
   },
   {
     "siteID": 2,
-    "date": "21/01/2020",
+    "date": "22/01/2020",
     "startHour": "08:00",
-    "endHour": "09:00",
+    "endHour": "19:00",
       "sport": "Football",
     "title": "France - Italie",
     "description": "Finale de CDM.",
