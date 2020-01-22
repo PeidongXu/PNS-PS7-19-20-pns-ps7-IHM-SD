@@ -26,6 +26,8 @@ exemple : colis abandonnés).
 - Python : https://www.python.org/
 - OpenCV : ```pip install opencv-contrib-python```
 - modules : ```cd .\PNS-IHM-SD\front\ | npm install ``` et ```cd .\PNS-IHM-SD\back\ | npm install ```
+- Fichier .weight : ```yolov3.weights``` décompresser les 3 archives dans `PNS-IHM-SD/Video Detection/yolo-object-detection/yolo-coco`
+
 --------
 ## EXECUTION
 #### Front: 
@@ -41,8 +43,35 @@ $ npm start
 ```
 --------
 ## Python (SD)
-Pour exécuter le code python seul :
+### Exécution 
+Pour exécuter le code python avec une image:
+
 ```bash
 $ cd '.\PNS-IHM-SD\Video Detection\yolo-object-detection\
 $ python yolo.py --image images/polytech.jpg --yolo yolo-coco
 ```
+Pour exécuter le code python avec une vidéo:
+```bash
+$ cd '.\PNS-IHM-SD\Video Detection\yolo-object-detection\
+$ python yolo_video.py --input videos/vid.mp4 --output output/vid_output.avi --yolo yolo-coco
+```
+### Output
+Format de output : "X,Y,Z"
+  * x: Le nombre de personne sur l'image
+  * y: Le nombre de groupe de personnes sur l'image
+  * z: Le nombre de personnes dans le plus grand groupe
+
+Fichier de sortie :
+Génération d'un image dans le répertoire courant avec la détection des personnes et groupes dessus
+
+-----------------------------
+
+## TEST 
+### PEOPLE COUNT
+Un test automatisé qui lance le script sur n images et retourne le pourcentage de réussite de la détection des personnes
+
+```bash
+$ cd '.\PNS-IHM-SD\Video Detection\yolo-object-detection\
+$ python test_people_count.py
+```
+
