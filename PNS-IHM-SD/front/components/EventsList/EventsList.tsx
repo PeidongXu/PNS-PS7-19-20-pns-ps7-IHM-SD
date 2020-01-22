@@ -10,6 +10,7 @@ import EventComponent from "../Event/EventComponent";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import images from "../../assets/sites/images";
+import * as geolib from "geolib";
 
 import { LinearGradient } from 'expo-linear-gradient';
 import Countdown from '../countdown/countdown'
@@ -79,7 +80,17 @@ class EventsList extends Component{
         this.setState({myLatitude : location.coords.latitude})
         this.setState({myLongitude : location.coords.longitude})
     };
+    /**
+     * Calcul de temps de déplacement vers un event
+     */
+    private getTimesDistance(event) {
+        const distance = geolib.getPreciseDistance(
+            { latitude: this.state.myLatitude, longitude: this.state.myLongitude },
+            { latitude: event.latitude, longitude: event.longitude }
+        );
+        return distance/(5/3.6)
 
+    }
     /**
      * Génération graphique et textuel d'un item de la List des évnènements
      * @param item
@@ -90,6 +101,9 @@ class EventsList extends Component{
             color=['#66b3ff', '#3d91e3'] //bleu
         }else if(this.getCountdown(item)>0){
             color=['#29e386' , '#10a158'] //vert
+            console.log("1: "+this.getCountdown(item)+" 2 "+this.getTimesDistance(item))
+            if(this.getCountdown(item)<this.getTimesDistance(item))
+            color=['#66b3ff' , '#10a158'] //vert
         }
         return (
             <View>
@@ -211,9 +225,7 @@ class EventsList extends Component{
                     renderItem={this.renderItem}
                     renderHiddenItem={ (rowData, rowMap) => (
                         <View style={styles.rowBack}>
-                            <TouchableOpacity onPress={ () => rowMap[rowData.item.key].closeRow() }>
-                                <Text>Close</Text>
-                            </TouchableOpacity>
+                            <TouchableOpacity/>
                             <Favorites/>
                         </View>
                     )}
