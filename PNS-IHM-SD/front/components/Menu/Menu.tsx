@@ -78,11 +78,10 @@ class Menu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {this.getItem("flag-o", "Events Past", 40, "#F44336", "font-awesome", "before")}
+          {this.getItem("flag-o", "Past Days", 40, "#F44336", "font-awesome", "before")}
           {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorites")}
-          {this.getItem("flag", "Not Started", 40, "#10a158", "font-awesome", "after")}
+          {this.getItem("flag", "Futur Days", 40, "#10a158", "font-awesome", "after")}
         </View>
-        <View style = {styles.lineStyle} />
       </View>
     );
   }
