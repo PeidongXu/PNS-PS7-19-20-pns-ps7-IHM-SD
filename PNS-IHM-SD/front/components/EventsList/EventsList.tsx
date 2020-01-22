@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { serverUrl } from '../../serverConfig/server.config';
-import { StyleSheet, Text, View, SafeAreaView, Modal, ScrollView, Platform, TouchableOpacity, Button, Image, TouchableHighlight, TouchableNativeFeedback, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Modal, ScrollView, Platform, TouchableOpacity, Image, TouchableHighlight, TouchableNativeFeedback, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Constants from 'expo-constants';
@@ -16,6 +16,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Countdown from '../countdown/countdown'
 import moment from "moment";
 import Favorites from '../Favorite/Favorite';
+import MapView, { Marker } from 'react-native-maps';
+import { Button } from "react-native-elements";
 
 class EventsList extends Component{
     static navigationOptions = props => {
@@ -26,12 +28,14 @@ class EventsList extends Component{
         load: "false",
         events: [],
         modalVisible: false,
-        event: null,
+        event: false,
         location: null,
         errorMessage: null,
         myLatitude: 43.615692,
         myLongitude: 7.071778,
         duration: null,
+        eventLatitude: 43.615692,
+        eventLongitude: 7.071778,
     };
 
     constructor(props) {
@@ -101,9 +105,8 @@ class EventsList extends Component{
             color=['#66b3ff', '#3d91e3'] //bleu
         }else if(this.getCountdown(item)>0){
             color=['#29e386' , '#10a158'] //vert
-            console.log("1: "+this.getCountdown(item)+" 2 "+this.getTimesDistance(item))
             if(this.getCountdown(item)<this.getTimesDistance(item))
-            color=['#66b3ff' , '#10a158'] //vert
+            color=['#66b3ff' , '#10a158'] //Bleu - +++vert
         }
         return (
             <View>
@@ -168,8 +171,9 @@ class EventsList extends Component{
     openModal(event: Event) {
         this.setState({ modalVisible: true });
         this.setState({ event: event });
+        this.setState({eventLatitude : event.latitude});
+        this.setState({eventLongitude : event.longitude});
     }
-
     closeModal() {
         this.setState({ modalVisible: false });
     }
@@ -202,19 +206,58 @@ class EventsList extends Component{
                     onTouchOutside={() => {
                         this.closeModal();
                     }}
+                    
                 >
+                    
                     <View style={styles.innerContainer}>
-                            <EventComponent
-                                event={this.state.event}
-                                location={this.state.location}
-                                myLatitude ={this.state.myLatitude}
-                                myLongitude ={this.state.myLongitude}
-                            />
-                            <Button
-                                onPress={() => this.closeModal()}
-                                title="Close Event"
-                            >
-                            </Button>
+                        <EventComponent
+                            event={this.state.event}
+                            location={this.state.location}
+                            myLatitude ={this.state.myLatitude}
+                            myLongitude ={this.state.myLongitude}
+                        />
+                        <View style={{
+                                position: 'absolute',
+                                left: 0,
+                               //right: 0,
+                                top: 0,
+                                bottom: 0
+                            }}>
+                        <Button 
+                        raised
+                        type="solid"
+                            icon={
+                                <Icon
+                                  name="arrow-left"
+                                  size={20}
+                                  color="white"
+                                />
+                              }
+                            onPress={() => this.closeModal()}
+                            title= " close"
+
+                        >
+                        </Button>
+                        </View>
+                    </View> 
+                    <View style={styles.container}>
+                        <MapView style={styles.mapStyle}
+                            showsUserLocation={true}
+                            zoomEnabled={true}
+                            zoomControlEnabled={false}
+                            scrollEnabled = {false}
+                            initialRegion={{
+                                latitude: 43.615692,
+                                longitude: 7.071778,
+                                latitudeDelta: 0.03,
+                                longitudeDelta: 0.01,
+                            }}>
+
+                        <Marker
+                           coordinate={{ latitude: this.state.eventLatitude, longitude: this.state.eventLongitude }}
+                        />
+
+                        </MapView>
                     </View>
 
                 </Modal>
@@ -226,11 +269,13 @@ class EventsList extends Component{
                     renderHiddenItem={ (rowData, rowMap) => (
                         <View style={styles.rowBack}>
                             <TouchableOpacity/>
-                            <Favorites/>
+                            <View style={styles.favorites}>
+                                <Favorites />
+                            </View>
                         </View>
                     )}
                     renderSectionHeader={this._renderSection}
-                    rightOpenValue={-75}
+                    rightOpenValue={-80}
                     closeOnScroll={true}
                 />
 
@@ -247,7 +292,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff"
     },
     innerContainer: {
-        height: Dimensions.get('window').height,
+        height: Dimensions.get('window').height-Dimensions.get('window').height/4,
         alignItems: 'center',
         //backgroundColor: '#2f2c3c', // sombre
         backgroundColor: "#fff"
@@ -295,6 +340,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 15,
     },
+    favorites: {
+        marginRight : 25,
+    },
+    mapStyle: {
+        //width: Dimensions.get('window').width,
+        //height: Dimensions.get('window').height-30,
+        flex: 1,
+        justifyContent: "center",
+        height: "50%",
+        width: "100%"
+      },
 
 
 });

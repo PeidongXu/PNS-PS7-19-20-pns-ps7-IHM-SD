@@ -30,6 +30,11 @@ class Countdown extends Component {
             if(this.state.countdown < 86400){
                 timetoshow = ['H', 'M']
             }
+            if(this.state.countdown < 3600){
+                timetoshow = ['M', 'S']
+            }
+            console.log(this.state.countdown)
+            
             if(!this.state.inEvent) {
                 return <CountDown
                 until={this.state.countdown}

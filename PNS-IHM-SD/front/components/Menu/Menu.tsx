@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import styles from "./style";
-import MapEvent from "../Map/MapEvent"
+import { Divider } from 'react-native-elements';
 
 class Menu extends Component {
   /**
@@ -78,16 +78,16 @@ class Menu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {this.getItem("flag-checkered", "Today Events", 70, "#3d91e3", "font-awesome","today")}
-          {this.getItem("favorite", "Favorites", 70, "#f66", "materialicons", "favorites")}
-          {this.getItem("flag-o", "Events Past", 70, "#F44336", "font-awesome", "before")}
-          {this.getItem("flag", "Not Started", 70, "#10a158", "font-awesome", "after")}
+          {this.getItem("flag-o", "Events Past", 40, "#F44336", "font-awesome", "before")}
+          {this.getItem("favorite", "Favorites", 40, "#f66", "materialicons", "favorites")}
+          {this.getItem("flag", "Not Started", 40, "#10a158", "font-awesome", "after")}
         </View>
+        <View style = {styles.lineStyle} />
       </View>
     );
   }
 }
-
+//{this.getItem("flag-checkered", "Today Events", 70, "#3d91e3", "font-awesome","today")}
 //{this.getItem("flag", "Right Now", 40, "#66b3ff", "font-awesome","rightnow")}
 
 //{this.getItemDay("calendar", "Choose Day", 70, "#ffa54d", "font-awesome")}

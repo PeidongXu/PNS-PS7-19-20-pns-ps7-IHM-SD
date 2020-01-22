@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, ScrollView } from 'react-native';
 import Countdown from "../countdown/countdown"
 import moment from "moment"
 import * as geolib from "geolib";
 import images from "../../assets/sites/images";
 import { serverUrl } from "../../serverConfig/server.config";
 import Favorites from '../Favorite/Favorite';
+import MapView, { Marker } from 'react-native-maps';
 
 class EventComponent extends Component {
     constructor(props) {
@@ -120,10 +121,12 @@ class EventComponent extends Component {
         );
         return (
 
+            <ScrollView>
             <View>
                 <Image style={styles.picture} source={images[this.state.image]} />
                 <View style={styles.center}>
                     <Text style={styles.title}>{this.state.event.title}</Text>
+                    <Favorites/>
                 </View>
 
                 <View style={styles.boxWithShadow} >
@@ -141,10 +144,10 @@ class EventComponent extends Component {
                         finished = {this.isItFinished()}
                         inEvent = {true}
                     />
-                </View>
-                <View style={styles.boxWithShadow}><Favorites/></View>
-                
+                </View>            
             </View>
+            </ScrollView>
+        
 
         );
     }
@@ -159,6 +162,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         //color: "#fff",
         fontSize: 18,
+        flex: 1
         
     },
     Size: {
