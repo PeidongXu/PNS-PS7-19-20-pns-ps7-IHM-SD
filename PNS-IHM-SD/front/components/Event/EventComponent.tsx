@@ -32,8 +32,8 @@ class EventComponent extends Component {
 
     /**
      * gérantion d'un delay pour les requets en millisecondes
-     * 
-     * @param ms 
+     *
+     * @param ms
      */
     delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -72,7 +72,7 @@ class EventComponent extends Component {
     }
 
     /**
-     * Update des images associées dans l'évènement 
+     * Update des images associées dans l'évènement
      * Exec le scrip de comptage de personne
      */
     private async changeImage() {
@@ -126,7 +126,9 @@ class EventComponent extends Component {
                 <Image style={styles.picture} source={images[this.state.image]} />
                 <View style={styles.center}>
                     <Text style={styles.title}>{this.state.event.title}</Text>
-                    <Favorites/>
+                    <Favorites
+                        event={this.state.event}
+                    />
                 </View>
 
                 <View style={styles.boxWithShadow} >
@@ -144,10 +146,10 @@ class EventComponent extends Component {
                         finished = {this.isItFinished()}
                         inEvent = {true}
                     />
-                </View>            
+                </View>
             </View>
             </ScrollView>
-        
+
 
         );
     }
@@ -157,13 +159,19 @@ export default EventComponent;
 
 const styles = StyleSheet.create({
     picture: { width: Dimensions.get('window').width, height: Dimensions.get('window').width/2 },
+    container: {
+        flex: 1,
+        backgroundColor: '#000',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     center: {
         alignItems: 'center',
         alignContent: 'center',
         //color: "#fff",
         fontSize: 18,
         flex: 1
-        
+
     },
     Size: {
         fontSize: 18,
@@ -181,7 +189,7 @@ const styles = StyleSheet.create({
         //color: '#fff',
         marginTop:5 ,
         marginBottom: 4,
-        
+
     },
     normal: {
         fontSize: 18,

@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Constants from 'expo-constants';
 import { Event } from '../../Models/Event';
-import axios from "axios";
+//import axios from "axios";
+import axios from  'axios-observable';
 import EventComponent from "../Event/EventComponent";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
@@ -28,7 +29,7 @@ class EventsList extends Component{
         load: "false",
         events: [],
         modalVisible: false,
-        event: false,
+        event: null,
         location: null,
         errorMessage: null,
         myLatitude: 43.615692,
@@ -66,7 +67,7 @@ class EventsList extends Component{
     private URL = this.URLGeneration();
 
     private getEvents = async () => {
-        axios.get<Event[]>(this.URL).then(res => {
+        axios.get<Event[]>(this.URL).subscribe(res => {
             this.setState({ load: "true" });
             this.setState({ events: res.data });
         });
@@ -132,9 +133,8 @@ class EventsList extends Component{
                                 finished = {this.isItFinished(item)}
                                 inEvent = {false}/>
                             </View>
-                            <View><Favorites/></View>
                             <View style={styles.chevronContainer}>
-                                
+
                                 <Icon name="chevron-right" style={styles.Icon} />
                             </View>
                         </View>
@@ -206,9 +206,8 @@ class EventsList extends Component{
                     onTouchOutside={() => {
                         this.closeModal();
                     }}
-                    
                 >
-                    
+
                     <View style={styles.innerContainer}>
                         <EventComponent
                             event={this.state.event}
@@ -219,11 +218,11 @@ class EventsList extends Component{
                         <View style={{
                                 position: 'absolute',
                                 left: 0,
-                               //right: 0,
-                                top: 0,
+                               right: 0,
+                                //top: 0,
                                 bottom: 0
                             }}>
-                        <Button 
+                        <Button
                         raised
                         type="solid"
                             icon={
@@ -239,7 +238,7 @@ class EventsList extends Component{
                         >
                         </Button>
                         </View>
-                    </View> 
+                    </View>
                     <View style={styles.container}>
                         <MapView style={styles.mapStyle}
                             showsUserLocation={true}
@@ -270,7 +269,8 @@ class EventsList extends Component{
                         <View style={styles.rowBack}>
                             <TouchableOpacity/>
                             <View style={styles.favorites}>
-                                <Favorites />
+                                <Favorites
+                                    event ={rowData.item}/>
                             </View>
                         </View>
                     )}

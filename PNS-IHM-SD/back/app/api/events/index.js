@@ -342,6 +342,55 @@ router.post('/favorites', (req, res) => {
   }
 });
 
+function isItFav(id){
+  let event = Event.getById(id)
+  let fav = Favorite.get()
+  let rep = false
+  fav.forEach((element) =>{
+    if(element.EventId == event.id){
+      rep = true
+    }
+  })
+  return rep
+
+}
+
+router.get('/favorites/:id', (req, res) => {
+  try {
+    res.status(200).json(isItFav(req.params.id));
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+function getFavFromEvent(idEvent){
+  let id = 0
+  Favorite.get().forEach((element)=> {
+    if(element.EventId == idEvent){
+      id = element.id
+    }
+  })
+
+  return id
+}
+
+router.delete('/favorites/:idEvent', (req, res) => {
+  try {
+    res.status(200).json(Favorite.delete(getFavFromEvent(req.params.idEvent)));
+  } catch (err) {
+    if (err.name === 'NotFoundError') {
+      res.status(404).end();
+    } else {
+      res.status(500).json(err);
+    }
+  }});
+
+
+
 /*FOR TEST ---> FRONT-BACK-PYTHON*/
 router.get('/testing/', (req, res) => {
 
