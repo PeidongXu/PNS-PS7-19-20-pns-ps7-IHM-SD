@@ -14,6 +14,7 @@ class Favorites extends Component {
     this.setState(state => ({
       toggle: !state.toggle
     }));
+    //requet push 
   };
 
   render() {
@@ -24,7 +25,7 @@ class Favorites extends Component {
             <Icon
                 name='heart-o'
                 type='font-awesome'
-                color='#fff'
+                color='#f66'
               />
               :
               <Icon

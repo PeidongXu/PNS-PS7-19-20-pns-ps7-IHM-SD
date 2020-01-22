@@ -16,24 +16,6 @@ import Countdown from '../countdown/countdown'
 import moment from "moment";
 import Favorites from '../Favorite/Favorite';
 
-
-/**
- * Génération d'un Item de la list (event)
- * @param event
- */
-function Item({ event }) {
-    return (
-        <View>
-            <TouchableOpacity onPress={() => <EventComponent />}>
-                <View style={styles.item}>
-                    <Text style={styles.title}>{event.title}</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    );
-
-}
-
 class EventsList extends Component{
     static navigationOptions = props => {
         const TimeData = props.navigation.getParam("TimeData");
