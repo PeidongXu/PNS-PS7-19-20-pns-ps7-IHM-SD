@@ -8,24 +8,31 @@ import Finder from "../../components/Finder/Finder";
 //import ProfileScreen from "../../components/Profile/Profile";
 import MapScreen from "../../components/Map/Map";
 import MapEvent from "../../components/Map/MapEvent"
-import About from "../About/About";
 import SliderDay from "../Filter/SliderDay"
-//Screen in the Home tab
+
+/**
+ * Déclaration des routes avec un alias
+ * Exemple:  Alias : component
+ */
 const DashboardContainer = createStackNavigator(
   {
-    Home: Finder,
+    Events: Finder,
     MapView: MapScreen,
     MapEvent: MapEvent,
-    SliderDay: SliderDay
+    SliderDay: SliderDay,
+    Finder: Finder
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Events"
   }
 );
-//The Main Tab =>Home - Profile  add more tabs here..
+
+/**
+ * Création de la navigation en bas de page
+ */
 const bottomTab = createBottomTabNavigator(
   {
-    Home: {
+    Events: {
       screen: DashboardContainer,
       navigationOptions: {
         tabBarLabel: "Find",
@@ -33,20 +40,20 @@ const bottomTab = createBottomTabNavigator(
           <Icon
             name="filter"
             size={30}
-            color={`${focused ? "#e90000" : "#575757"}`}
+            color={`${focused ? "#3d91e3" : "#575757"}`}
           />
         ),
       }
     },
-    Map: {
-      screen: MapScreen,
+    Finder: {
+      screen: MapEvent,
       navigationOptions: ({ navigation }) => ({
-        title: "Map",
+        title: "Today Event",
         tabBarIcon: ({ focused }) => (
           <Icon
             name="map-marker"
             size={30}
-            color={`${focused ? "#e90000" : "#575757"}`}
+            color={`${focused ? "#3d91e3" : "#575757"}`}
           />
         )
       })
@@ -65,7 +72,10 @@ const bottomTab = createBottomTabNavigator(
     }
   }
 );
-//Getting the tab header title
+
+/**
+ * Get Nom de Tab pour le Titre de la page
+ */
 bottomTab.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
   const headerTitle = routeName;
@@ -74,7 +84,9 @@ bottomTab.navigationOptions = ({ navigation }) => {
   };
 };
 
-//Root navigator
+/**
+ * Root Navigation
+ */
 const AppNavigator = createStackNavigator(
   {
     Home: bottomTab

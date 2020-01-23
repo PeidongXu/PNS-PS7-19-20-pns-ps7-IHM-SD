@@ -35,7 +35,6 @@ weightsPath = os.path.sep.join([args["yolo"], "yolov3.weights"])
 configPath = os.path.sep.join([args["yolo"], "yolov3.cfg"])
 
 # load our YOLO object detector trained on COCO dataset (80 classes)
-# print("[INFO] loading YOLO from disk...")
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
 # load our input image and grab its spatial dimensions
@@ -59,6 +58,11 @@ end = time.time()
 # show timing information on YOLO
 
 # print("[INFO] YOLO took {:.6f} seconds".format(end - start))
+
+
+#Some global variables : number of groups, number of persons in the largest group
+n_groups = 0  #number of group
+n_persons = 0 #number of person in the largest group
 
 
 # initialize our lists of detected bounding boxes, confidences, and
@@ -155,6 +159,8 @@ for i in group_list:
 
 #split the group  modify by peidong 17/01/2020 17:13
 def sort_group(groups):
+	global n_groups
+	global n_persons
 	#group_set =  [ [1,2,3],[4,5,6],[3,4],[7,8],[8,9],[6,12,13] ]
 	l = len(groups)
 	for i in range(l):
@@ -179,8 +185,11 @@ def sort_group(groups):
 			max = len(groups[i])
 
 	#print(nb_group)
+	n_groups = nb_group
 	#print("the number of group is (%d)" %(nb_group))
+
 	#print("the largest number of people is (%d)" %max)# the largest number of people in one group
+	n_persons = max
 
 
 
@@ -208,8 +217,6 @@ if len(idxs) > 0:
 
 
 
-
-
 #Give Number of persons
 smith_a=0
 if len(idxs) > 0:
@@ -231,9 +238,9 @@ if len(idxs) > 0:
 # show the output image
 
 #print("the number of people is %d" %smith_a)
-sys.stdout.write(str(smith_a))
+sys.stdout.write(str(smith_a)+","+str(n_groups)+","+str(n_persons))
 sys.stdout.flush()
 #cv2.imshow("Image", image)
-cv2.imwrite("testyolo.jpg",image)
-cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
+#cv2.imwrite("testyoloo.jpg",image)
+#cv2.imwrite("../front/assets/imagesScript/output.jpg", image)
 cv2.waitKey(0)

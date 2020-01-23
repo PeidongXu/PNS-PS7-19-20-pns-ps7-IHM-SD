@@ -18,5 +18,10 @@ export default StyleSheet.create({
   },
   textStyle: {
     fontSize: FONT_SIZE
-  }
+  },
+  lineStyle:{
+    borderWidth: 0.5,
+    borderColor:'black',
+    margin:10,
+}
 });

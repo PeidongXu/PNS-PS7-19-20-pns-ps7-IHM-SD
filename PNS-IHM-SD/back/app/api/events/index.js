@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {Event, Site } = require('../../models');
+const {Event, Site,Favorite } = require('../../models');
 const  moment = require('moment');
 
 const router = new Router();
@@ -15,11 +15,19 @@ function addCoordinate(){
 
   return events;
 }
+
+function getAllEvents(){
+  let events =[];
+  events = events.concat({"title": "All Events", "data": addCoordinate()})
+
+  return events;
+
+}
 //router.get('/', (req, res) => res.status(200).json(Event.get()));
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(addCoordinate());
+    res.status(200).json(getAllEvents());
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
@@ -51,9 +59,29 @@ function checkDate(){
   return filtredEvents;
 }
 
+function TodayEvents(){
+  /*let filtredEvents= [];
+  filtredEvents = filtredEvents.concat(checkRightNow());
+  filtredEvents = filtredEvents.concat(checkTodayNotStarted());
+  filtredEvents = filtredEvents.concat(checkTodayFinish());
+
+  return filtredEvents;*/
+
+  let data=[];
+  let RightNow ={"title": "Events in progress" , "data":checkRightNow() };
+  data=data.concat(RightNow)
+  let NotStarted =  {"title": "Events not started" , "data":checkTodayNotStarted() };
+  data=data.concat(NotStarted)
+  let Finished =  {"title": "Events finished" , "data":checkTodayFinish() };
+  data=data.concat(Finished)
+
+  return data;
+
+}
+
 router.get('/today', (req, res) => {
   try {
-    res.status(200).json(checkDate());
+    res.status(200).json(TodayEvents());
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
@@ -162,7 +190,11 @@ function checkAfterDate(){
     (a, b) =>
       new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
   );
-  return filtredEvents;
+
+  let data =[]
+  data = data.concat({"title": "Events not started", "data": filtredEvents})
+
+  return data
 }
 
 router.get('/after', (req, res) => {
@@ -198,8 +230,10 @@ function checkBeforeDate(){
     (a, b) =>
       new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
   );
+  let data = []
+  data =data.concat( {"title": "Events already finished", "data": filtredEvents})
 
-  return filtredEvents;
+  return data
 }
 
 router.get('/before', (req, res) => {
@@ -270,6 +304,93 @@ router.post('/', (req, res) => {
   }
 });
 
+function getFavEvents(){
+  let favorites = Favorite.get()
+  let favEvents=[]
+  favorites.forEach((element)=>{
+    let event = Event.getById(element.EventId)
+    let tmpsite = Site.getById(event.siteID);
+    event['latitude'] = tmpsite.latitude;
+    event['longitude'] = tmpsite.longitude;
+    favEvents.push(event)
+  });
+
+  favEvents.sort(
+    (a, b) =>
+      new moment(a.date + " " + a.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm") - new moment(b.date + " " + b.startHour,"DD/MM/YYYY HH:mm").format("YYYYMMDDHHmm")
+  );
+
+  let data = []
+  data = data.concat({"title": "Favorites Events", "data": favEvents})
+
+  return data
+
+}
+
+router.get('/favorites', (req, res) => res.status(200).json(getFavEvents()));
+
+router.post('/favorites', (req, res) => {
+  try {
+    const fav = Favorite.create(req.body);
+    res.status(201).json(fav);
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+function isItFav(id){
+  let event = Event.getById(id)
+  let fav = Favorite.get()
+  let rep = false
+  fav.forEach((element) =>{
+    if(element.EventId == event.id){
+      rep = true
+    }
+  })
+  return rep
+
+}
+
+router.get('/favorites/:id', (req, res) => {
+  try {
+    res.status(200).json(isItFav(req.params.id));
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
+function getFavFromEvent(idEvent){
+  let id = 0
+  Favorite.get().forEach((element)=> {
+    if(element.EventId == idEvent){
+      id = element.id
+    }
+  })
+
+  return id
+}
+
+router.delete('/favorites/:idEvent', (req, res) => {
+  try {
+    res.status(200).json(Favorite.delete(getFavFromEvent(req.params.idEvent)));
+  } catch (err) {
+    if (err.name === 'NotFoundError') {
+      res.status(404).end();
+    } else {
+      res.status(500).json(err);
+    }
+  }});
+
+
+
 /*FOR TEST ---> FRONT-BACK-PYTHON*/
 router.get('/testing/', (req, res) => {
 
@@ -278,7 +399,7 @@ router.get('/testing/', (req, res) => {
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/yoga.jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
-    res.status(200).json(parseInt(data.toString(),10));
+    res.status(200).json(data.toString());
   });
 
   // Handle error output
@@ -300,7 +421,7 @@ router.get('/detection/:id', (req, res) => {
   var process = spawn("python",["../Video Detection/yolo-object-detection/yolo.py","--image","../Video Detection/yolo-object-detection/images/"+req.params.id+".jpg","--yolo","../Video Detection/yolo-object-detection/yolo-coco"]);
 
   process.stdout.on('data', (data) => {
-    res.status(200).json(parseInt(data.toString(),10));
+    res.status(200).json(data.toString());
   });
 
   // Handle error output
