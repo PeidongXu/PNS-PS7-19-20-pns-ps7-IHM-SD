@@ -19,7 +19,17 @@ const images ={
     polytech7: require('./../imagesScript/scene/polytech7.jpg'),
     polytech8: require('./../imagesScript/scene/polytech8.jpg'),
     polytech9: require('./../imagesScript/scene/polytech9.jpg'),
-    polytech10: require('./../imagesScript/scene/polytech10.jpg')
+    polytech10: require('./../imagesScript/scene/polytech10.jpg'),
+    many1: require('./../imagesScript/scene/many1.jpg'),
+    many2: require('./../imagesScript/scene/many2.jpg'),
+    many3: require('./../imagesScript/scene/many3.jpg'),
+    many4: require('./../imagesScript/scene/many4.jpg'),
+    many5: require('./../imagesScript/scene/many5.jpg'),
+    many6: require('./../imagesScript/scene/many6.jpg'),
+    many7: require('./../imagesScript/scene/many7.jpg'),
+    many8: require('./../imagesScript/scene/many8.jpg'),
+    many9: require('./../imagesScript/scene/many9.jpg'),
+    many10: require('./../imagesScript/scene/many10.jpg'),
 }
 
 export default images;
