@@ -34,5 +34,11 @@
     "longitude": 7.074364,
     "title": "Golf",
     "id": 6
+  },
+  {
+    "latitude": 43.619379,
+    "longitude": 7.072364,
+    "title": "Tennis",
+    "id": 7
   }
 ]
