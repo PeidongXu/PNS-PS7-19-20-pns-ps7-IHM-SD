@@ -21,6 +21,15 @@ exemple : colis abandonnés).
 * Calcul de distance en 2D sur une image (3D requière du matériel spécifique)
 * Détection de groupe sur une image (en fonction de la distance entre les personnes)
 --------
+## INFORMATIONS
+Information sur statistique et utilisation de Yolov3 :
+* https://pjreddie.com/darknet/yolo/
+* https://github.com/ultralytics/yolov3#map
+
+Documentation route API (en construction) :
+* https://app.swaggerhub.com/apis-docs/PNS-PS7-19-20-IHM-SD/PS7-IHM-SD/1.0.0
+
+--------
 ## REQUIREMENTS
 - Expo : ```npm install -g expo-cli```
 - Python : https://www.python.org/
