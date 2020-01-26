@@ -3,7 +3,7 @@
     "siteID": 1,
     "date": "24/01/2020",
     "startHour": "10:00",
-    "endHour": "12:00",
+    "endHour": "14:00",
     "sport": "Football",
     "title": "Allemagne - Espagne",
     "description": "Match de Football équipe d'Allemagne contre l'équipe d'Espagne.",
@@ -15,7 +15,7 @@
   {
     "siteID": 2,
     "date": "24/01/2020",
-    "startHour": "12:15",
+    "startHour": "13:30",
     "endHour": "15:00",
     "sport": "Athlétisme",
     "title": "100 mètres haies",
