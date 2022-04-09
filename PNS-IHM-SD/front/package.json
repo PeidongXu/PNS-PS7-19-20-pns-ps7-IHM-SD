@@ -18,7 +18,7 @@
     "expo": "~36.0.0",
     "expo-linear-gradient": "^8.0.0",
     "geolib": "^3.2.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "native-base": "^2.13.8",
     "react": "~16.9.0",
     "react-base": "^0.2.0",
